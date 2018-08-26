@@ -9,8 +9,13 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/raatiniemi/maven"
+    }
 }
 
 dependencies {
+    compileOnly 'me.raatiniemi.sonar:core:0.0.2'
+
     testImplementation 'junit:junit:4.12'
 }
