@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sonar.plugins.objectivec.violations.oclint;
+package me.raatiniemi.sonar.oclint;
 
 import com.google.common.io.Closeables;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 public final class OCLintProfile extends ProfileDefinition {
-    public static final String PROFILE_PATH = "/org/sonar/plugins/oclint/profile-oclint.xml";
+    public static final String PROFILE_PATH = "/me/raatiniemi/sonar/oclint/profile-oclint.xml";
     private static final Logger LOGGER = LoggerFactory.getLogger(OCLintProfile.class);
 
     private final OCLintProfileImporter profileImporter;
