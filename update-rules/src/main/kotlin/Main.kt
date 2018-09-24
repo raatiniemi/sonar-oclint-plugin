@@ -25,7 +25,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
 
-private const val pathToRules = "plugin/src/main/resources/org/sonar/plugins/oclint/rules.txt"
+private const val pathToRules = "plugin/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
 private const val pathToProfile = "plugin/src/main/resources/org/sonar/plugins/oclint/profile-oclint.xml"
 
 private const val baseUrl = "http://docs.oclint.org/en/stable/rules"
