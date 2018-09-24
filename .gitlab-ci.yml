@@ -1,0 +1,42 @@
+image: gradle:4.9-jdk8
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  policy: push
+  paths:
+    - .gradle
+    - build
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+build:
+  stage: build
+  script:
+    - gradle clean build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
+
+test:
+  stage: test
+  script:
+    - gradle test
+  except:
+    - master
+
+analyse:
+  stage: test
+  script:
+    - gradle sonarqube
+  only:
+    - master
