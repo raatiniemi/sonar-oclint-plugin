@@ -40,3 +40,10 @@ analyse:
     - gradle sonarqube
   only:
     - master
+
+deploy:
+  stage: deploy
+  script:
+    - gradle plugin:bintrayUpload
+  only:
+    - tags
