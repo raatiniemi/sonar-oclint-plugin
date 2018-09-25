@@ -5,7 +5,8 @@
 [![code test coverage](https://sonarcloud.io/api/project_badges/measure?project=me.raatiniemi.sonar%3Aoclint&metric=coverage)](https://sonarcloud.io/dashboard?id=me.raatiniemi.sonar%3Aoclint)
 [![technical dept](https://sonarcloud.io/api/project_badges/measure?project=me.raatiniemi.sonar%3Aoclint&metric=sqale_index)](https://sonarcloud.io/dashboard?id=me.raatiniemi.sonar%3Aoclint)
 
-The repository is a SonarQube plugin for parsing reports from [OCLint](http://oclint.org/).
+The repository is a SonarQube plugin for parsing reports from [OCLint](http://oclint.org/). *This is not a standalone
+plugin yet, i.e. it needs to be [embedded within another plugin](https://gitlab.com/raatiniemi/sonar-objective-c).*
 
 ## Usage
 
