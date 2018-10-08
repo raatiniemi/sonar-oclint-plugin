@@ -32,7 +32,7 @@ sonarqube {
     }
 }
 
-project(':plugin') {
+project(':oclint') {
     sonarqube {
         properties {
             properties['sonar.java.source'] = JavaVersion.VERSION_1_8
