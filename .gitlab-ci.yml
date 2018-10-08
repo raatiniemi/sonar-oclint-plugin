@@ -44,6 +44,6 @@ analyse:
 deploy:
   stage: deploy
   script:
-    - gradle plugin:bintrayUpload
+    - gradle oclint:bintrayUpload
   only:
     - tags
