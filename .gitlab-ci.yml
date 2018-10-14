@@ -33,6 +33,10 @@ test:
     - gradle test
   except:
     - master
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
 
 analyse:
   stage: test
@@ -40,6 +44,10 @@ analyse:
     - gradle sonarqube
   only:
     - master
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
 
 deploy:
   stage: deploy
@@ -47,3 +55,7 @@ deploy:
     - gradle oclint:bintrayUpload
   only:
     - tags
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
