@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,8 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.raatiniemi.sonar.oclint;
+package me.raatiniemi.sonar.oclint.report;
 
+import me.raatiniemi.sonar.oclint.Violation;
+import me.raatiniemi.sonar.oclint.report.OCLintXmlReportParser;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

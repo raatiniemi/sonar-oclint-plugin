@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.raatiniemi.sonar.oclint;
+package me.raatiniemi.sonar.oclint.report;
 
 import me.raatiniemi.sonar.core.xml.XmlReportParser;
-import me.raatiniemi.sonar.oclint.report.ViolationReportParser;
+import me.raatiniemi.sonar.oclint.Violation;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.w3c.dom.Document;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> implements ViolationReportParser {
+public final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> implements ViolationReportParser {
     private static final Logger LOGGER = Loggers.get(OCLintXmlReportParser.class);
 
     private static final String VIOLATION = "violation";
@@ -75,7 +75,7 @@ final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> imple
     }
 
     @Nonnull
-    static OCLintXmlReportParser create(@Nonnull DocumentBuilder documentBuilder) {
+    public static OCLintXmlReportParser create(@Nonnull DocumentBuilder documentBuilder) {
         return new OCLintXmlReportParser(documentBuilder);
     }
 

@@ -18,6 +18,7 @@
 package me.raatiniemi.sonar.oclint;
 
 import me.raatiniemi.sonar.core.xml.XmlReportSensor;
+import me.raatiniemi.sonar.oclint.report.OCLintXmlReportParser;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.batch.sensor.SensorContext;
