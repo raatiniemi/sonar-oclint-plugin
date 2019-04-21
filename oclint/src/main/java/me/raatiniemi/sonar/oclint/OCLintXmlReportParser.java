@@ -31,7 +31,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> implements ViolationReportParser {
-    private static final Logger LOGGER = Loggers.get(OCLintSensorPersistence.class);
+    private static final Logger LOGGER = Loggers.get(OCLintXmlReportParser.class);
 
     private static final String VIOLATION = "violation";
     private static final String PATH = "path";
