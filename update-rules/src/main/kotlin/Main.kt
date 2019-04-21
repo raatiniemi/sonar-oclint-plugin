@@ -25,6 +25,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
 
+private const val pathToReadMe = "README.md"
 private const val pathToRules = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
 private const val pathToProfile = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile-oclint.xml"
 
@@ -45,6 +46,7 @@ private val availableRuleCategoriesWithSeverity = mapOf(
 fun main(args: Array<String>) {
     FuelManager.instance.basePath = baseUrl
 
+    writeVersionToReadMe(readVersion())
     listRuleCategoriesWithMissingSeverity(nameForAvailableRuleCategories())
 
     val rules = availableRuleCategoriesWithSeverity
@@ -91,6 +93,33 @@ private fun writeProfileToFile(profile: Profile) {
                 out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
                 out.println(mapper.writeValueAsString(profile))
             }
+}
+
+private fun readVersion(): String {
+    return fetch("index.html")
+            .select("#rule-index > p")
+            .map { it.text() }
+            .mapNotNull {
+                val regex = """OCLint ([\d\.]+) includes""".toRegex()
+                val (version) = regex.find(it)?.destructured ?: return@mapNotNull null
+                return@mapNotNull version
+            }
+            .firstOrNull() ?: ""
+}
+
+private fun writeVersionToReadMe(version: String) {
+    File(pathToReadMe).run {
+        readLines()
+                .map {
+                    val regex = """oclint-([\d\.]+)-blue""".toRegex()
+                    val result = regex.find(it) ?: return@map it
+                    val (previousVersion) = result.destructured
+
+                    it.replace(previousVersion, version)
+                }
+                .joinToString("\n")
+                .let { writeText("$it\n") }
+    }
 }
 
 private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<String>) {
