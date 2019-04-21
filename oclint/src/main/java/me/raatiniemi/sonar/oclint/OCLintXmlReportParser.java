@@ -17,6 +17,7 @@
 package me.raatiniemi.sonar.oclint;
 
 import me.raatiniemi.sonar.core.xml.XmlReportParser;
+import me.raatiniemi.sonar.oclint.report.ViolationReportParser;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.w3c.dom.Document;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> {
+final class OCLintXmlReportParser extends XmlReportParser<List<Violation>> implements ViolationReportParser {
     private static final Logger LOGGER = Loggers.get(OCLintSensorPersistence.class);
 
     private static final String VIOLATION = "violation";

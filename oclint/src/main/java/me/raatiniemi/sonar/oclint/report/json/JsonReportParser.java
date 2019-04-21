@@ -18,9 +18,9 @@
 package me.raatiniemi.sonar.oclint.report.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.raatiniemi.sonar.core.ReportParser;
 import me.raatiniemi.sonar.core.xml.XmlReportParser;
 import me.raatiniemi.sonar.oclint.Violation;
+import me.raatiniemi.sonar.oclint.report.ViolationReportParser;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class JsonReportParser implements ReportParser<List<Violation>> {
+class JsonReportParser implements ViolationReportParser {
     private static final Logger LOGGER = Loggers.get(XmlReportParser.class);
 
     private final ObjectMapper objectMapper;
