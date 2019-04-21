@@ -19,7 +19,7 @@ package me.raatiniemi.sonar.oclint;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-final class Violation {
+final public class Violation {
     private final String path;
     private final int startLine;
     private final String rule;
@@ -52,7 +52,7 @@ final class Violation {
     }
 
     @Nonnull
-    static Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -83,7 +83,7 @@ final class Violation {
         );
     }
 
-    static class Builder {
+    public static class Builder {
         private String path = "";
         private int startLine;
         private String rule = "";
@@ -93,31 +93,31 @@ final class Violation {
         }
 
         @Nonnull
-        Builder setPath(@Nonnull String path) {
+        public Builder setPath(@Nonnull String path) {
             this.path = path;
             return this;
         }
 
         @Nonnull
-        Builder setStartLine(int startLine) {
+        public Builder setStartLine(int startLine) {
             this.startLine = startLine;
             return this;
         }
 
         @Nonnull
-        Builder setRule(@Nonnull String rule) {
+        public Builder setRule(@Nonnull String rule) {
             this.rule = rule;
             return this;
         }
 
         @Nonnull
-        Builder setMessage(@Nonnull String message) {
+        public Builder setMessage(@Nonnull String message) {
             this.message = message;
             return this;
         }
 
         @Nonnull
-        Violation build() {
+        public Violation build() {
             return new Violation(this);
         }
     }
