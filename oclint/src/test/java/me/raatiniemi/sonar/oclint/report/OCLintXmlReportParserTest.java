@@ -48,7 +48,7 @@ public class OCLintXmlReportParserTest {
     @Before
     public void setUp() throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        parser = OCLintXmlReportParser.create(factory.newDocumentBuilder());
+        parser = new OCLintXmlReportParser(factory.newDocumentBuilder());
     }
 
     @Test

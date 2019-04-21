@@ -70,7 +70,7 @@ public final class OCLintXmlReportParser extends XmlReportParser<List<Violation>
         return element.getAttribute(MESSAGE);
     }
 
-    private OCLintXmlReportParser(@Nonnull DocumentBuilder documentBuilder) {
+    OCLintXmlReportParser(@Nonnull DocumentBuilder documentBuilder) {
         super(documentBuilder);
     }
 
