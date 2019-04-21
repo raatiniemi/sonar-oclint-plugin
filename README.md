@@ -1,6 +1,6 @@
 # sonar-oclint-plugin
 
-![OCLint compatible version](https://img.shields.io/badge/oclint-0.13-blue.svg)
+[![OCLint compatible version](https://img.shields.io/badge/oclint-0.13-blue.svg)](http://oclint.org/)
 [![pipeline status](https://gitlab.com/raatiniemi/sonar-oclint-plugin/badges/master/pipeline.svg)](https://gitlab.com/raatiniemi/sonar-oclint-plugin/commits/master)
 [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=me.raatiniemi.sonar%3Aoclint&metric=alert_status)](https://sonarcloud.io/dashboard?id=me.raatiniemi.sonar%3Aoclint)
 [![code test coverage](https://sonarcloud.io/api/project_badges/measure?project=me.raatiniemi.sonar%3Aoclint&metric=coverage)](https://sonarcloud.io/dashboard?id=me.raatiniemi.sonar%3Aoclint)
