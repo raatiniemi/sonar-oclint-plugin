@@ -15,11 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint.report.json;
+package me.raatiniemi.sonar.oclint.report;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.raatiniemi.sonar.oclint.Violation;
-import me.raatiniemi.sonar.oclint.report.SampleReport;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
