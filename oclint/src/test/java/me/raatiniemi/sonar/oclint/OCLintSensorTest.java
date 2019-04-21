@@ -47,7 +47,7 @@ public class OCLintSensorTest {
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint");
+    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "xml");
     private final MapSettings settings = new MapSettings();
 
     private SensorContextTester context;
