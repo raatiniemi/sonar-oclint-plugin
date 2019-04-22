@@ -33,6 +33,7 @@ final class SampleReport {
 
     private static final String LONG_LINE_RULE_NAME = "long line";
     private static final String UNUSED_METHOD_PARAMETER_RULE_NAME = "unused method parameter";
+    private static final String PARAMETER_REASSIGNMENT_RULE_NAME = "parameter reassignment";
 
     private SampleReport() {
     }
@@ -354,13 +355,13 @@ final class SampleReport {
         violations.add(buildViolation(
                 INSIGHTS_API_CLIENT_PATH,
                 36,
-                "parameter reassignment",
+                PARAMETER_REASSIGNMENT_RULE_NAME,
                 ""
         ));
         violations.add(buildViolation(
                 INSIGHTS_API_CLIENT_PATH,
                 37,
-                "parameter reassignment",
+                PARAMETER_REASSIGNMENT_RULE_NAME,
                 ""
         ));
         violations.add(buildViolation(
