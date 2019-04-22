@@ -21,7 +21,7 @@
   },
   "violation": [
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 0,
       "startColumn": 1,
       "endLine": 37,

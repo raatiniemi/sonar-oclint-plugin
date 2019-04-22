@@ -67,7 +67,7 @@ public class JsonReportParserTest {
         List<Violation> expected = new ArrayList<>();
         expected.add(
                 Violation.builder()
-                        .setPath("/sample-project/API/ProductDetailAPIClient.m")
+                        .setPath("sample-project/API/ProductDetailAPIClient.m")
                         .setStartLine(1)
                         .setRule("long line")
                         .setMessage("Line with 115 characters exceeds limit of 100")
@@ -78,7 +78,7 @@ public class JsonReportParserTest {
 
         assertTrue("No violations are available", actual.isPresent());
         assertEquals(expected, actual.get());
-        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: /sample-project/API/ProductDetailAPIClient.m"));
+        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"));
     }
 
     @Test

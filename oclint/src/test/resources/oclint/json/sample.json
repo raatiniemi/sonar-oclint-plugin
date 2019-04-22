@@ -21,7 +21,7 @@
   },
   "violation": [
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 37,
       "startColumn": 1,
       "endLine": 37,
@@ -31,7 +31,7 @@
       "message": "Line with 115 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 38,
       "startColumn": 1,
       "endLine": 38,
@@ -41,7 +41,7 @@
       "message": "Line with 113 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 47,
       "startColumn": 1,
       "endLine": 47,
@@ -51,7 +51,7 @@
       "message": "Line with 115 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 48,
       "startColumn": 1,
       "endLine": 48,
@@ -61,7 +61,7 @@
       "message": "Line with 121 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 37,
       "startColumn": 54,
       "endLine": 37,
@@ -71,7 +71,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 37,
       "startColumn": 89,
       "endLine": 37,
@@ -81,7 +81,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 38,
       "startColumn": 54,
       "endLine": 38,
@@ -91,7 +91,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductDetailAPIClient.m",
+      "path": "sample-project/API/ProductDetailAPIClient.m",
       "startLine": 38,
       "startColumn": 89,
       "endLine": 38,
@@ -101,7 +101,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 25,
       "startColumn": 1,
       "endLine": 25,
@@ -111,7 +111,7 @@
       "message": "Line with 186 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 27,
       "startColumn": 1,
       "endLine": 27,
@@ -121,7 +121,7 @@
       "message": "Line with 104 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 28,
       "startColumn": 1,
       "endLine": 28,
@@ -131,7 +131,7 @@
       "message": "Line with 121 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 25,
       "startColumn": 47,
       "endLine": 25,
@@ -141,7 +141,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 25,
       "startColumn": 82,
       "endLine": 25,
@@ -151,7 +151,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 25,
       "startColumn": 127,
       "endLine": 25,
@@ -161,7 +161,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/FundFinderAPIClient.m",
+      "path": "sample-project/API/FundFinderAPIClient.m",
       "startLine": 25,
       "startColumn": 162,
       "endLine": 25,
@@ -171,7 +171,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/MobileAPIClient.m",
+      "path": "sample-project/API/MobileAPIClient.m",
       "startLine": 28,
       "startColumn": 1,
       "endLine": 28,
@@ -181,7 +181,7 @@
       "message": "Line with 166 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/MobileAPIClient.m",
+      "path": "sample-project/API/MobileAPIClient.m",
       "startLine": 46,
       "startColumn": 1,
       "endLine": 46,
@@ -191,7 +191,7 @@
       "message": "Line with 117 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 34,
       "startColumn": 1,
       "endLine": 34,
@@ -201,7 +201,7 @@
       "message": "Line with 151 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 37,
       "startColumn": 1,
       "endLine": 37,
@@ -211,7 +211,7 @@
       "message": "Line with 141 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 38,
       "startColumn": 1,
       "endLine": 38,
@@ -221,7 +221,7 @@
       "message": "Line with 154 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 1,
       "endLine": 41,
@@ -231,7 +231,7 @@
       "message": "Line with 218 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 42,
       "startColumn": 1,
       "endLine": 42,
@@ -241,7 +241,7 @@
       "message": "Line with 154 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 1,
       "endLine": 45,
@@ -251,7 +251,7 @@
       "message": "Line with 287 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 47,
       "startColumn": 1,
       "endLine": 47,
@@ -261,7 +261,7 @@
       "message": "Line with 138 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 50,
       "startColumn": 1,
       "endLine": 50,
@@ -271,7 +271,7 @@
       "message": "Line with 321 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 59,
       "startColumn": 1,
       "endLine": 59,
@@ -281,7 +281,7 @@
       "message": "Line with 113 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 60,
       "startColumn": 1,
       "endLine": 60,
@@ -291,7 +291,7 @@
       "message": "Line with 121 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 37,
       "startColumn": 79,
       "endLine": 37,
@@ -301,7 +301,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 37,
       "startColumn": 114,
       "endLine": 37,
@@ -311,7 +311,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 79,
       "endLine": 41,
@@ -321,7 +321,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 114,
       "endLine": 41,
@@ -331,7 +331,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 150,
       "endLine": 41,
@@ -341,7 +341,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 159,
       "endLine": 41,
@@ -351,7 +351,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 41,
       "startColumn": 194,
       "endLine": 41,
@@ -361,7 +361,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 148,
       "endLine": 45,
@@ -371,7 +371,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 183,
       "endLine": 45,
@@ -381,7 +381,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 219,
       "endLine": 45,
@@ -391,7 +391,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 228,
       "endLine": 45,
@@ -401,7 +401,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 45,
       "startColumn": 263,
       "endLine": 45,
@@ -411,7 +411,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 50,
       "startColumn": 182,
       "endLine": 50,
@@ -421,7 +421,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 50,
       "startColumn": 217,
       "endLine": 50,
@@ -431,7 +431,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 50,
       "startColumn": 262,
       "endLine": 50,
@@ -441,7 +441,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/API/ProductListingAPIClient.m",
+      "path": "sample-project/API/ProductListingAPIClient.m",
       "startLine": 50,
       "startColumn": 297,
       "endLine": 50,
@@ -451,7 +451,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 11,
       "startColumn": 1,
       "endLine": 11,
@@ -461,7 +461,7 @@
       "message": "Line with 132 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 12,
       "startColumn": 1,
       "endLine": 12,
@@ -471,7 +471,7 @@
       "message": "Line with 120 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 26,
       "startColumn": 1,
       "endLine": 26,
@@ -481,7 +481,7 @@
       "message": "Line with 192 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 28,
       "startColumn": 1,
       "endLine": 28,
@@ -491,7 +491,7 @@
       "message": "Line with 117 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 29,
       "startColumn": 1,
       "endLine": 29,
@@ -501,7 +501,7 @@
       "message": "Line with 127 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 33,
       "startColumn": 1,
       "endLine": 33,
@@ -511,7 +511,7 @@
       "message": "Line with 258 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 41,
       "startColumn": 1,
       "endLine": 41,
@@ -521,7 +521,7 @@
       "message": "Line with 127 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 45,
       "startColumn": 1,
       "endLine": 45,
@@ -531,7 +531,7 @@
       "message": "Line with 124 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 50,
       "startColumn": 1,
       "endLine": 50,
@@ -541,7 +541,7 @@
       "message": "Line with 128 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 36,
       "startColumn": 5,
       "endLine": 36,
@@ -551,7 +551,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 37,
       "startColumn": 5,
       "endLine": 37,
@@ -561,7 +561,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 26,
       "startColumn": 55,
       "endLine": 26,
@@ -571,7 +571,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 26,
       "startColumn": 90,
       "endLine": 26,
@@ -581,7 +581,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 26,
       "startColumn": 134,
       "endLine": 26,
@@ -591,7 +591,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 26,
       "startColumn": 169,
       "endLine": 26,
@@ -601,7 +601,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 33,
       "startColumn": 121,
       "endLine": 33,
@@ -611,7 +611,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 33,
       "startColumn": 156,
       "endLine": 33,
@@ -621,7 +621,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 33,
       "startColumn": 200,
       "endLine": 33,
@@ -631,7 +631,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 33,
       "startColumn": 235,
       "endLine": 33,
@@ -641,7 +641,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 45,
       "startColumn": 71,
       "endLine": 45,
@@ -651,7 +651,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 45,
       "startColumn": 106,
       "endLine": 45,
@@ -661,7 +661,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 46,
       "startColumn": 29,
       "endLine": 46,
@@ -671,7 +671,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/InsightsAPIClient.m",
+      "path": "sample-project/InsightsAPIClient.m",
       "startLine": 46,
       "startColumn": 64,
       "endLine": 46,
@@ -681,7 +681,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 11,
       "startColumn": 1,
       "endLine": 11,
@@ -691,7 +691,7 @@
       "message": "Line with 116 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 28,
       "startColumn": 1,
       "endLine": 28,
@@ -701,7 +701,7 @@
       "message": "Line with 216 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 32,
       "startColumn": 1,
       "endLine": 32,
@@ -711,7 +711,7 @@
       "message": "Line with 127 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 36,
       "startColumn": 1,
       "endLine": 36,
@@ -721,7 +721,7 @@
       "message": "Line with 213 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 40,
       "startColumn": 1,
       "endLine": 40,
@@ -731,7 +731,7 @@
       "message": "Line with 128 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 28,
       "startColumn": 78,
       "endLine": 28,
@@ -741,7 +741,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 28,
       "startColumn": 113,
       "endLine": 28,
@@ -751,7 +751,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 28,
       "startColumn": 158,
       "endLine": 28,
@@ -761,7 +761,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 28,
       "startColumn": 193,
       "endLine": 28,
@@ -771,7 +771,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 36,
       "startColumn": 75,
       "endLine": 36,
@@ -781,7 +781,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 36,
       "startColumn": 110,
       "endLine": 36,
@@ -791,7 +791,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 36,
       "startColumn": 155,
       "endLine": 36,
@@ -801,7 +801,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ChannelContentAPIClient.m",
+      "path": "sample-project/ChannelContentAPIClient.m",
       "startLine": 36,
       "startColumn": 190,
       "endLine": 36,
@@ -811,7 +811,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 23,
       "startColumn": 1,
       "endLine": 23,
@@ -821,7 +821,7 @@
       "message": "Line with 225 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 25,
       "startColumn": 1,
       "endLine": 25,
@@ -831,7 +831,7 @@
       "message": "Line with 131 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 26,
       "startColumn": 1,
       "endLine": 26,
@@ -841,7 +841,7 @@
       "message": "Line with 101 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 27,
       "startColumn": 1,
       "endLine": 27,
@@ -851,7 +851,7 @@
       "message": "Line with 101 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 28,
       "startColumn": 1,
       "endLine": 28,
@@ -861,7 +861,7 @@
       "message": "Line with 121 characters exceeds limit of 100"
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 23,
       "startColumn": 86,
       "endLine": 23,
@@ -871,7 +871,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 23,
       "startColumn": 121,
       "endLine": 23,
@@ -881,7 +881,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 23,
       "startColumn": 166,
       "endLine": 23,
@@ -891,7 +891,7 @@
       "message": ""
     },
     {
-      "path": "/sample-project/ViewAllHoldingsAPIClient.m",
+      "path": "sample-project/ViewAllHoldingsAPIClient.m",
       "startLine": 23,
       "startColumn": 201,
       "endLine": 23,

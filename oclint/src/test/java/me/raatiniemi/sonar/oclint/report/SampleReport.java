@@ -23,13 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class SampleReport {
-    private static final String PRODUCT_DETAIL_API_CLIENT_PATH = "/sample-project/API/ProductDetailAPIClient.m";
-    private static final String FUND_FINDER_API_CLIENT_PATH = "/sample-project/API/FundFinderAPIClient.m";
-    private static final String MOBILE_API_CLIENT_PATH = "/sample-project/API/MobileAPIClient.m";
-    private static final String PRODUCT_LISTING_API_CLIENT_PATH = "/sample-project/API/ProductListingAPIClient.m";
-    private static final String INSIGHTS_API_CLIENT_PATH = "/sample-project/InsightsAPIClient.m";
-    private static final String CHANNEL_CONTENT_API_CLIENT_PATH = "/sample-project/ChannelContentAPIClient.m";
-    private static final String VIEW_ALL_HOLDINGS_API_CLIENT_PATH = "/sample-project/ViewAllHoldingsAPIClient.m";
+    private static final String PRODUCT_DETAIL_API_CLIENT_PATH = "sample-project/API/ProductDetailAPIClient.m";
+    private static final String FUND_FINDER_API_CLIENT_PATH = "sample-project/API/FundFinderAPIClient.m";
+    private static final String MOBILE_API_CLIENT_PATH = "sample-project/API/MobileAPIClient.m";
+    private static final String PRODUCT_LISTING_API_CLIENT_PATH = "sample-project/API/ProductListingAPIClient.m";
+    private static final String INSIGHTS_API_CLIENT_PATH = "sample-project/InsightsAPIClient.m";
+    private static final String CHANNEL_CONTENT_API_CLIENT_PATH = "sample-project/ChannelContentAPIClient.m";
+    private static final String VIEW_ALL_HOLDINGS_API_CLIENT_PATH = "sample-project/ViewAllHoldingsAPIClient.m";
 
     private static final String LONG_LINE_RULE_NAME = "long line";
     private static final String UNUSED_METHOD_PARAMETER_RULE_NAME = "unused method parameter";
