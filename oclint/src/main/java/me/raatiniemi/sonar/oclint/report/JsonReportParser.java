@@ -58,9 +58,19 @@ class JsonReportParser implements ViolationReportParser {
     private Violation transformToViolation(JsonReport.Violation violation) {
         return Violation.builder()
                 .setPath(violation.path)
-                .setStartLine(violation.startLine)
+                .setStartLine(readStartLine(violation))
                 .setRule(violation.rule)
                 .setMessage(violation.message)
                 .build();
+    }
+
+    private int readStartLine(JsonReport.Violation violation) {
+        int startLine = violation.startLine;
+        if (startLine == 0) {
+            LOGGER.warn("Found empty start line in report for path: {}", violation.path);
+            return 1;
+        }
+
+        return startLine;
     }
 }
