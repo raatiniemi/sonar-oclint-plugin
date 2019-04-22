@@ -25,7 +25,6 @@ import org.junit.runners.JUnit4;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
-import javax.annotation.Nonnull;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,55 +62,32 @@ public class OCLintXmlReportParserTest {
 
     @Test
     public void parse_withDocumentWithEmptyStartLine() {
-        Path documentPath = Paths.get(resourcePath.toString(), "oclint-with-empty-start-line.xml");
-        List<Violation> expected = buildExpectedViolationsForSample();
+        Path documentPath = Paths.get(resourcePath.toString(), "with-empty-start-line.xml");
+        List<Violation> expected = new ArrayList<>();
+        expected.add(
+                Violation.builder()
+                        .setPath("sample-project/API/ProductDetailAPIClient.m")
+                        .setStartLine(1)
+                        .setRule("long line")
+                        .setMessage("Line with 115 characters exceeds limit of 100")
+                        .build()
+        );
 
         Optional<List<Violation>> actual = parser.parse(documentPath.toFile());
 
         assertTrue(actual.isPresent());
         assertEquals(expected, actual.get());
-        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: RASqlite/RASqlite.m"));
+        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"));
     }
 
     @Test
     public void parse_withSampleDocument() {
-        Path documentPath = Paths.get(resourcePath.toString(), "oclint.xml");
-        List<Violation> expected = buildExpectedViolationsForSample();
+        Path documentPath = Paths.get(resourcePath.toString(), "sample.xml");
+        List<Violation> expected = SampleReport.build();
 
         Optional<List<Violation>> actual = parser.parse(documentPath.toFile());
 
         assertTrue(actual.isPresent());
         assertEquals(expected, actual.get());
-    }
-
-    @Nonnull
-    private List<Violation> buildExpectedViolationsForSample() {
-        List<Violation> expected = new ArrayList<>();
-        Violation violation;
-
-        violation = Violation.builder()
-                .setPath("RASqlite/RASqlite.m")
-                .setStartLine(1)
-                .setRule("deep nested block")
-                .setMessage("Block depth of 6 exceeds limit of 5")
-                .build();
-        expected.add(violation);
-
-        violation = Violation.builder()
-                .setPath("RASqlite/RASqlite.m")
-                .setStartLine(1)
-                .setRule("ivar assignment outside accessors or init")
-                .build();
-        expected.add(violation);
-
-        violation = Violation.builder()
-                .setPath("RASqlite/RASqlite.m")
-                .setStartLine(1)
-                .setRule("unused method parameter")
-                .setMessage("The parameter 'commit' is unused.")
-                .build();
-        expected.add(violation);
-
-        return expected;
     }
 }

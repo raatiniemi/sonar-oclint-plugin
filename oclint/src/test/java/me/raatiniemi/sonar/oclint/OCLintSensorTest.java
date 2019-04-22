@@ -23,6 +23,9 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.DefaultActiveRules;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
@@ -39,6 +42,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -51,28 +56,51 @@ public class OCLintSensorTest {
     private final MapSettings settings = new MapSettings();
 
     private SensorContextTester context;
-    private FileSystemHelpers helpers;
-
     private OCLintSensor sensor;
 
     @Before
     public void setUp() {
         context = SensorContextTester.create(temporaryFolder.getRoot());
-        helpers = FileSystemHelpers.create(context);
-
         sensor = new OCLintSensor(settings.asConfig());
 
         List<NewActiveRule> rules = new ArrayList<>();
         ActiveRulesBuilder builder = new ActiveRulesBuilder();
-        rules.add(builder.create(RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, "deep nested block")));
+        rules.add(builder.create(RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, "long line")));
         rules.add(builder.create(RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, "unused method parameter")));
-        rules.add(builder.create(RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, "ivar assignment outside accessors or init")));
+        rules.add(builder.create(RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, "parameter reassignment")));
         context.setActiveRules(new DefaultActiveRules(rules));
+
+        FileSystemHelpers helpers = FileSystemHelpers.create(context);
+        helpers.addToFileSystem(createFile("sample-project/API/ProductDetailAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/API/FundFinderAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/API/MobileAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/API/ProductListingAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/InsightsAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/ChannelContentAPIClient.m"));
+        helpers.addToFileSystem(createFile("sample-project/ViewAllHoldingsAPIClient.m"));
+    }
+
+    @Nonnull
+    private TestInputFileBuilder buildInputFile(@Nonnull String relativePath) {
+        List<String> intStream = IntStream.range(1, 100)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
+
+        return new TestInputFileBuilder(context.module().key(), relativePath)
+                .setLanguage("objc")
+                .initMetadata(String.join("\n", intStream));
+    }
+
+    @Nonnull
+    private DefaultInputFile createFile(@Nonnull String relativePath) {
+        return buildInputFile(relativePath)
+                .setType(InputFile.Type.MAIN)
+                .build();
     }
 
     private void createReportFile(@Nonnull String relativePath) {
         try {
-            List<String> reportLines = Files.readAllLines(Paths.get(resourcePath.toString(), "oclint.xml"));
+            List<String> reportLines = Files.readAllLines(Paths.get(resourcePath.toString(), "sample.xml"));
 
             Path destination = Paths.get(temporaryFolder.getRoot().getAbsolutePath(), relativePath);
             Files.createDirectories(destination.getParent());
@@ -105,26 +133,24 @@ public class OCLintSensorTest {
 
     @Test
     public void execute_withDefaultReportPath() {
-        helpers.addToFileSystem(helpers.createFile("RASqlite/RASqlite.m", "objc"));
         createReportFile("sonar-reports/oclint.xml");
 
         sensor.execute(context);
 
-        assertTrue(isIssuePresent("deep nested block"));
-        assertTrue(isIssuePresent("ivar assignment outside accessors or init"));
+        assertTrue(isIssuePresent("long line"));
         assertTrue(isIssuePresent("unused method parameter"));
+        assertTrue(isIssuePresent("parameter reassignment"));
     }
 
     @Test
     public void execute_withReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.xml");
-        helpers.addToFileSystem(helpers.createFile("RASqlite/RASqlite.m", "objc"));
         createReportFile("oclint.xml");
 
         sensor.execute(context);
 
-        assertTrue(isIssuePresent("deep nested block"));
-        assertTrue(isIssuePresent("ivar assignment outside accessors or init"));
+        assertTrue(isIssuePresent("long line"));
         assertTrue(isIssuePresent("unused method parameter"));
+        assertTrue(isIssuePresent("parameter reassignment"));
     }
 }
