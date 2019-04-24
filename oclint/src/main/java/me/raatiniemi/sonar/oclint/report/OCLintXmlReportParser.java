@@ -75,11 +75,6 @@ public final class OCLintXmlReportParser extends XmlReportParser<List<Violation>
     }
 
     @Nonnull
-    public static OCLintXmlReportParser create(@Nonnull DocumentBuilder documentBuilder) {
-        return new OCLintXmlReportParser(documentBuilder);
-    }
-
-    @Nonnull
     private static Collection<Element> getViolationElements(@Nonnull Document document) {
         return getElements(document, VIOLATION);
     }
