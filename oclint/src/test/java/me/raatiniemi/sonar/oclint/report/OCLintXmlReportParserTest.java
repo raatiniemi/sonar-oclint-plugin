@@ -56,7 +56,7 @@ public class OCLintXmlReportParserTest {
 
         Optional<List<Violation>> actual = parser.parse(documentPath.toFile());
 
-        assertTrue(actual.isPresent());
+        assertTrue("No violations are available", actual.isPresent());
         assertTrue(actual.get().isEmpty());
     }
 
@@ -75,7 +75,7 @@ public class OCLintXmlReportParserTest {
 
         Optional<List<Violation>> actual = parser.parse(documentPath.toFile());
 
-        assertTrue(actual.isPresent());
+        assertTrue("No violations are available", actual.isPresent());
         assertEquals(expected, actual.get());
         assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"));
     }
@@ -87,7 +87,7 @@ public class OCLintXmlReportParserTest {
 
         Optional<List<Violation>> actual = parser.parse(documentPath.toFile());
 
-        assertTrue(actual.isPresent());
+        assertTrue("No violations are available", actual.isPresent());
         assertEquals(expected, actual.get());
     }
 }
