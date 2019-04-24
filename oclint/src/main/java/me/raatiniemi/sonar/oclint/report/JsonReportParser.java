@@ -35,7 +35,7 @@ class JsonReportParser implements ViolationReportParser {
 
     private final ObjectMapper objectMapper;
 
-    JsonReportParser(ObjectMapper objectMapper) {
+    JsonReportParser(@Nonnull ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -55,7 +55,8 @@ class JsonReportParser implements ViolationReportParser {
         }
     }
 
-    private Violation transformToViolation(JsonReport.Violation violation) {
+    @Nonnull
+    private Violation transformToViolation(@Nonnull JsonReport.Violation violation) {
         return Violation.builder()
                 .setPath(violation.path)
                 .setStartLine(readStartLine(violation))
@@ -64,7 +65,7 @@ class JsonReportParser implements ViolationReportParser {
                 .build();
     }
 
-    private int readStartLine(JsonReport.Violation violation) {
+    private int readStartLine(@Nonnull JsonReport.Violation violation) {
         int startLine = violation.startLine;
         if (startLine == 0) {
             LOGGER.warn("Found empty start line in report for path: {}", violation.path);
