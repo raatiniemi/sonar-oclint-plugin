@@ -40,7 +40,7 @@ public class OCLintXmlReportParserTest {
     @Rule
     public LogTester logTester = new LogTester();
 
-    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "xml");
+    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "report");
 
     private OCLintXmlReportParser parser;
 

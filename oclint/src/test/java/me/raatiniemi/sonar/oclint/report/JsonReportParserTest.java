@@ -41,7 +41,7 @@ public class JsonReportParserTest {
     @Rule
     public LogTester logTester = new LogTester();
 
-    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "json");
+    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "report");
     private JsonReportParser parser;
 
     @Before
