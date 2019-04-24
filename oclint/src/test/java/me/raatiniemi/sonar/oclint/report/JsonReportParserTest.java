@@ -38,10 +38,11 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class JsonReportParserTest {
+    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "report");
+
     @Rule
     public LogTester logTester = new LogTester();
 
-    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "report");
     private JsonReportParser parser;
 
     @Before

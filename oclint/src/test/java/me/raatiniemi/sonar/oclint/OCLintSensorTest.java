@@ -49,11 +49,11 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class OCLintSensorTest {
-    @Rule
-    public TemporaryFolder temporaryFolder = new TemporaryFolder();
-
     private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "report");
     private final MapSettings settings = new MapSettings();
+
+    @Rule
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
     private SensorContextTester context;
     private OCLintSensor sensor;

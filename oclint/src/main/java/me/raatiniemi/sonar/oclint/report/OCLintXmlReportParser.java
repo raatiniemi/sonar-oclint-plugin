@@ -46,6 +46,10 @@ public final class OCLintXmlReportParser extends XmlReportParser<List<Violation>
             .setMessage(parseMessage(element))
             .build();
 
+    OCLintXmlReportParser(@Nonnull DocumentBuilder documentBuilder) {
+        super(documentBuilder);
+    }
+
     @Nonnull
     private static String parsePath(@Nonnull Element element) {
         return element.getAttribute(PATH);
@@ -68,10 +72,6 @@ public final class OCLintXmlReportParser extends XmlReportParser<List<Violation>
     @Nonnull
     private static String parseMessage(@Nonnull Element element) {
         return element.getAttribute(MESSAGE);
-    }
-
-    OCLintXmlReportParser(@Nonnull DocumentBuilder documentBuilder) {
-        super(documentBuilder);
     }
 
     @Nonnull

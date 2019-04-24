@@ -33,6 +33,11 @@ final public class Violation {
     }
 
     @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    @Nonnull
     String getPath() {
         return path;
     }
@@ -49,11 +54,6 @@ final public class Violation {
     @Nonnull
     String getMessage() {
         return message;
-    }
-
-    @Nonnull
-    public static Builder builder() {
-        return new Builder();
     }
 
     @Override

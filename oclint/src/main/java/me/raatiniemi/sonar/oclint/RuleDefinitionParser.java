@@ -30,6 +30,9 @@ import java.util.Set;
 final class RuleDefinitionParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(OCLintRulesDefinition.class);
 
+    private RuleDefinitionParser() {
+    }
+
     private static boolean isLineIgnored(@Nonnull String line) {
         return line.matches("\\=.*") || line.matches("Priority:.*");
     }
@@ -52,9 +55,6 @@ final class RuleDefinitionParser {
 
     private static boolean isType(@Nonnull String line) {
         return line.matches("Type:.*");
-    }
-
-    private RuleDefinitionParser() {
     }
 
     static RuleDefinitionParser create() {
