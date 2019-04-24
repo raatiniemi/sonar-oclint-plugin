@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class JsonReportParser implements ViolationReportParser {
+final class JsonReportParser implements ViolationReportParser {
     private static final Logger LOGGER = Loggers.get(XmlReportParser.class);
 
     private final ObjectMapper objectMapper;
