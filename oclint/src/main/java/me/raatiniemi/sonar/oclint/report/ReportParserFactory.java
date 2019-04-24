@@ -33,6 +33,7 @@ public final class ReportParserFactory {
     private ReportParserFactory() {
     }
 
+    @Nonnull
     public static ReportParserFactory create() {
         return new ReportParserFactory();
     }
