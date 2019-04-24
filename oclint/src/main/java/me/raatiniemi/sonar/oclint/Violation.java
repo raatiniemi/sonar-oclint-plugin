@@ -19,7 +19,7 @@ package me.raatiniemi.sonar.oclint;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-final public class Violation {
+final public class Violation implements Comparable<Violation> {
     private final String path;
     private final int startLine;
     private final String rule;
@@ -81,6 +81,16 @@ final public class Violation {
                 rule,
                 message
         );
+    }
+
+    @Override
+    public int compareTo(@Nonnull Violation o) {
+        int comparisonForPath = path.compareTo(o.path);
+        if (comparisonForPath == 0) {
+            return Integer.compare(startLine, o.startLine);
+        }
+
+        return comparisonForPath;
     }
 
     public static class Builder {
