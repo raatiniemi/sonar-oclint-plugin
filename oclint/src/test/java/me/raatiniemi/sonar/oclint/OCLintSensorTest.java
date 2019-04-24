@@ -52,7 +52,7 @@ public class OCLintSensorTest {
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint", "xml");
+    private final Path resourcePath = Paths.get("src", "test", "resources", "oclint");
     private final MapSettings settings = new MapSettings();
 
     private SensorContextTester context;
@@ -98,11 +98,11 @@ public class OCLintSensorTest {
                 .build();
     }
 
-    private void createReportFile(@Nonnull String relativePath) {
+    private void createReportFile(@Nonnull Path sourcePath, @Nonnull String destinationPath) {
         try {
-            List<String> reportLines = Files.readAllLines(Paths.get(resourcePath.toString(), "sample.xml"));
+            List<String> reportLines = Files.readAllLines(Paths.get(resourcePath.toString(), sourcePath.toString()));
 
-            Path destination = Paths.get(temporaryFolder.getRoot().getAbsolutePath(), relativePath);
+            Path destination = Paths.get(temporaryFolder.getRoot().getAbsolutePath(), destinationPath);
             Files.createDirectories(destination.getParent());
             Files.createFile(destination);
             Files.write(destination, reportLines);
@@ -133,7 +133,7 @@ public class OCLintSensorTest {
 
     @Test
     public void execute_withDefaultReportPath() {
-        createReportFile("sonar-reports/oclint.xml");
+        createReportFile(Paths.get("xml", "sample.xml"), "sonar-reports/oclint.xml");
 
         sensor.execute(context);
 
@@ -145,7 +145,19 @@ public class OCLintSensorTest {
     @Test
     public void execute_withReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.xml");
-        createReportFile("oclint.xml");
+        createReportFile(Paths.get("xml", "sample.xml"), "oclint.xml");
+
+        sensor.execute(context);
+
+        assertTrue(isIssuePresent("long line"));
+        assertTrue(isIssuePresent("unused method parameter"));
+        assertTrue(isIssuePresent("parameter reassignment"));
+    }
+
+    @Test
+    public void execute_withJsonReportPath() {
+        settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.json");
+        createReportFile(Paths.get("json", "sample.json"), "oclint.json");
 
         sensor.execute(context);
 

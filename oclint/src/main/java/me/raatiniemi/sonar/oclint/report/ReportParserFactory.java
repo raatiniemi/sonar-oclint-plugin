@@ -27,18 +27,18 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 
-final class ReportParserFactory {
+public final class ReportParserFactory {
     private static final Logger LOGGER = Loggers.get(ReportParserFactory.class);
 
     private ReportParserFactory() {
     }
 
-    static ReportParserFactory create() {
+    public static ReportParserFactory create() {
         return new ReportParserFactory();
     }
 
     @Nonnull
-    ViolationReportParser from(@Nonnull File file) {
+    public ViolationReportParser from(@Nonnull File file) {
         String path = file.getPath();
         if (isXml(path)) {
             return buildXmlReportParser();

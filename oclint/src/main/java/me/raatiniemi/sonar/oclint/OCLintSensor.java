@@ -17,8 +17,10 @@
  */
 package me.raatiniemi.sonar.oclint;
 
-import me.raatiniemi.sonar.core.xml.XmlReportSensor;
-import me.raatiniemi.sonar.oclint.report.OCLintXmlReportParser;
+import me.raatiniemi.sonar.core.ReportFinder;
+import me.raatiniemi.sonar.core.ReportSensor;
+import me.raatiniemi.sonar.oclint.report.ReportParserFactory;
+import me.raatiniemi.sonar.oclint.report.ViolationReportParser;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -26,7 +28,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
 
 import javax.annotation.Nonnull;
-import javax.xml.parsers.DocumentBuilder;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -42,11 +43,13 @@ import java.util.Optional;
                 project = true
         )
 )
-public final class OCLintSensor extends XmlReportSensor {
+public final class OCLintSensor extends ReportSensor {
     static final String REPORT_PATH_KEY = "sonar.objectivec.oclint.reportPath";
     static final String DEFAULT_REPORT_PATH = "sonar-reports/oclint.xml";
 
     private static final String NAME = "OCLint violation sensor";
+
+    private final ReportParserFactory reportParserFactory = ReportParserFactory.create();
 
     @SuppressWarnings("WeakerAccess")
     public OCLintSensor(@Nonnull Configuration configuration) {
@@ -69,18 +72,23 @@ public final class OCLintSensor extends XmlReportSensor {
 
     @Nonnull
     private List<Violation> collectAndParseAvailableReports(@Nonnull File projectDirectory) {
-        Optional<DocumentBuilder> documentBuilder = createDocumentBuilder();
-        if (!documentBuilder.isPresent()) {
-            return Collections.emptyList();
-        }
-
-        OCLintXmlReportParser parser = OCLintXmlReportParser.create(documentBuilder.get());
-        return collectAvailableReports(projectDirectory)
-                .findFirst()
-                .map(parser::parse)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+        Optional<File> value = findReport(projectDirectory);
+        return value.map(this::parseReport)
                 .orElse(Collections.emptyList());
+    }
+
+    @Nonnull
+    private Optional<File> findReport(@Nonnull File projectDirectory) {
+        return ReportFinder.create(projectDirectory)
+                .findReportMatching(readReportPath());
+    }
+
+    @Nonnull
+    private List<Violation> parseReport(@Nonnull File reportFile) {
+        ViolationReportParser parser = reportParserFactory.from(reportFile);
+        Optional<List<Violation>> violations = parser.parse(reportFile);
+
+        return violations.orElse(Collections.emptyList());
     }
 
     @Nonnull
