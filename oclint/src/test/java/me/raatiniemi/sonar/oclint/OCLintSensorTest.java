@@ -17,13 +17,16 @@
 package me.raatiniemi.sonar.oclint;
 
 import me.raatiniemi.sonar.core.internal.FileSystemHelpers;
+import me.raatiniemi.sonar.oclint.report.SampleReport;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
@@ -32,6 +35,7 @@ import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.rule.RuleKey;
 
@@ -41,7 +45,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -57,6 +63,55 @@ public class OCLintSensorTest {
 
     private SensorContextTester context;
     private OCLintSensor sensor;
+
+    @Nonnull
+    private static List<Violation> transformIssuesToViolations(@Nonnull Collection<Issue> issues) {
+        List<Violation> violations = issues.stream()
+                .map(transformIssueToViolation())
+                .collect(Collectors.toList());
+
+        return sort(violations);
+    }
+
+    @Nonnull
+    private static List<Violation> sort(@Nonnull Collection<Violation> violations) {
+        return violations.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Nonnull
+    private static Function<Issue, Violation> transformIssueToViolation() {
+        return issue -> {
+            IssueLocation issueLocation = issue.primaryLocation();
+
+            Violation.Builder builder = Violation.builder()
+                    .setPath(removePrefixFromKey(issueLocation.inputComponent()))
+                    .setStartLine(readStartLine(issueLocation))
+                    .setRule(issue.ruleKey().rule());
+
+            String message = issueLocation.message();
+            if (message != null) {
+                builder.setMessage(message);
+            }
+
+            return builder.build();
+        };
+    }
+
+    @Nonnull
+    private static String removePrefixFromKey(@Nonnull InputComponent inputComponent) {
+        String key = inputComponent.key();
+        return key.replace("projectKey:", "");
+    }
+
+    private static int readStartLine(@Nonnull IssueLocation issueLocation) {
+        TextRange textRange = issueLocation.textRange();
+        if (textRange == null) {
+            return 1;
+        }
+        return textRange.start().line();
+    }
 
     @Before
     public void setUp() {
@@ -111,16 +166,6 @@ public class OCLintSensorTest {
         }
     }
 
-    private boolean isIssuePresent(@Nonnull String ruleKey) {
-        String ruleKeyWithRepository = "OCLint:" + ruleKey;
-
-        return context.allIssues()
-                .stream()
-                .map(Issue::ruleKey)
-                .map(RuleKey::toString)
-                .anyMatch(rk -> rk.equalsIgnoreCase(ruleKeyWithRepository));
-    }
-
     @Test
     public void describe() {
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
@@ -134,35 +179,35 @@ public class OCLintSensorTest {
     @Test
     public void execute_withDefaultReportPath() {
         createReportFile("sample.xml", "sonar-reports/oclint.xml");
+        List<Violation> expected = sort(SampleReport.build());
 
         sensor.execute(context);
 
-        assertTrue(isIssuePresent("long line"));
-        assertTrue(isIssuePresent("unused method parameter"));
-        assertTrue(isIssuePresent("parameter reassignment"));
+        List<Violation> actual = transformIssuesToViolations(context.allIssues());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void execute_withReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.xml");
         createReportFile("sample.xml", "oclint.xml");
+        List<Violation> expected = sort(SampleReport.build());
 
         sensor.execute(context);
 
-        assertTrue(isIssuePresent("long line"));
-        assertTrue(isIssuePresent("unused method parameter"));
-        assertTrue(isIssuePresent("parameter reassignment"));
+        List<Violation> actual = transformIssuesToViolations(context.allIssues());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void execute_withJsonReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.json");
         createReportFile("sample.json", "oclint.json");
+        List<Violation> expected = sort(SampleReport.build());
 
         sensor.execute(context);
 
-        assertTrue(isIssuePresent("long line"));
-        assertTrue(isIssuePresent("unused method parameter"));
-        assertTrue(isIssuePresent("parameter reassignment"));
+        List<Violation> actual = transformIssuesToViolations(context.allIssues());
+        assertEquals(expected, actual);
     }
 }

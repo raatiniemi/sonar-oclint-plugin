@@ -22,7 +22,7 @@ import me.raatiniemi.sonar.oclint.Violation;
 import java.util.ArrayList;
 import java.util.List;
 
-final class SampleReport {
+public final class SampleReport {
     private static final String PRODUCT_DETAIL_API_CLIENT_PATH = "sample-project/API/ProductDetailAPIClient.m";
     private static final String FUND_FINDER_API_CLIENT_PATH = "sample-project/API/FundFinderAPIClient.m";
     private static final String MOBILE_API_CLIENT_PATH = "sample-project/API/MobileAPIClient.m";
@@ -38,7 +38,7 @@ final class SampleReport {
     private SampleReport() {
     }
 
-    static List<Violation> build() {
+    public static List<Violation> build() {
         List<Violation> violations = new ArrayList<>();
         violations.add(buildViolation(
                 PRODUCT_DETAIL_API_CLIENT_PATH,
