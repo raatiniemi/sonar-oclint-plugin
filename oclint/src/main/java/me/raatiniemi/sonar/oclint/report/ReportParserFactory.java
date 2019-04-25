@@ -65,6 +65,10 @@ public final class ReportParserFactory {
     private DocumentBuilder createDocumentBuilder() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            factory.setXIncludeAware(false);
+            factory.setExpandEntityReferences(false);
 
             return factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
