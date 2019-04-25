@@ -26,6 +26,8 @@ allprojects {
     jacocoTestReport {
         reports {
             xml.enabled true
+            xml.destination file("${buildDir}/reports/jacoco/test/jacoco.xml")
+
             csv.enabled false
             html.enabled false
         }

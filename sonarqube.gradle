@@ -45,7 +45,7 @@ project(':oclint') {
             properties['sonar.java.test.binaries'] = 'build/classes/java/test'
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.jacoco.reportPaths'] = fileTree(dir: 'build', includes: ['**/*.exec'])
+            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
         }
     }
 }
@@ -63,7 +63,7 @@ project(':update-rules') {
             properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.jacoco.reportPaths'] = fileTree(dir: 'build', includes: ['**/*.exec'])
+            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
         }
     }
 }
