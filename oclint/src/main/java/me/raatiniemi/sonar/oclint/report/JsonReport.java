@@ -28,7 +28,7 @@ final class JsonReport {
     List<Violation> violations;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    final static class Violation {
+    static final class Violation {
         @JsonProperty("path")
         String path;
         @JsonProperty("startLine")

@@ -19,7 +19,7 @@ package me.raatiniemi.sonar.oclint;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-final public class Violation implements Comparable<Violation> {
+public final class Violation implements Comparable<Violation> {
     private final String path;
     private final int startLine;
     private final String rule;
