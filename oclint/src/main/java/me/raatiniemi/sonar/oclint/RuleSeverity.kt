@@ -15,19 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.raatiniemi.sonar.oclint;
+package me.raatiniemi.sonar.oclint
 
-import javax.annotation.Nonnull;
-
-enum RuleSeverity {
+internal enum class RuleSeverity {
     INFO,
     MINOR,
     MAJOR,
     CRITICAL,
     BLOCKER;
 
-    @Nonnull
-    static RuleSeverity valueOfInt(int ordinal) {
-        return values()[ordinal];
+    companion object {
+        @JvmStatic
+        fun valueOfInt(ordinal: Int): RuleSeverity {
+            return values()[ordinal]
+        }
     }
 }
