@@ -41,8 +41,8 @@ project(':oclint') {
             properties['sonar.sources'] = 'src/main'
             properties['sonar.tests'] = 'src/test'
 
-            properties['sonar.java.binaries'] = 'build/classes/java/main'
-            properties['sonar.java.test.binaries'] = 'build/classes/java/test'
+            properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
+            properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
             properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
