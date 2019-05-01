@@ -64,13 +64,13 @@ class OCLintRulesDefinition : RulesDefinition {
         listLines: List<String>
     ) {
         parser.parseRuleDefinitionsFromLines(listLines)
-            .forEach {
-                repository.createRule(it.key)
+            .forEach { (key, name, description, severity, type) ->
+                repository.createRule(key)
                     .apply {
-                        setName(it.name)
-                        setSeverity(it.severity)
-                        setHtmlDescription(it.description)
-                        setType(RuleType.valueOf(it.type))
+                        setName(name)
+                        setSeverity(severity)
+                        setHtmlDescription(description)
+                        setType(RuleType.valueOf(type))
                     }
             }
     }
