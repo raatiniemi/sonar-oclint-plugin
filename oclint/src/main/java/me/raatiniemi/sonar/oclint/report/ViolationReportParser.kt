@@ -15,12 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint.report;
+package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.core.ReportParser;
-import me.raatiniemi.sonar.oclint.Violation;
+import me.raatiniemi.sonar.core.ReportParser
+import me.raatiniemi.sonar.oclint.Violation
 
-import java.util.List;
-
-public interface ViolationReportParser extends ReportParser<List<Violation>> {
-}
+interface ViolationReportParser : ReportParser<List<Violation>>
