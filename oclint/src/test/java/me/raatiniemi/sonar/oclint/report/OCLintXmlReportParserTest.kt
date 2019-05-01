@@ -82,6 +82,6 @@ class OCLintXmlReportParserTest {
         val actual = parser.parse(documentPath.toFile())
 
         assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get())
+        assertEquals(expected, actual.get().sorted())
     }
 }

@@ -143,7 +143,7 @@ class OCLintSensorTest {
     @Test
     fun execute_withDefaultReportPath() {
         createReportFile("sample.xml", "sonar-reports/oclint.xml")
-        val expected = SampleReport.build().sorted()
+        val expected = SampleReport.build()
 
         sensor.execute(context)
 
@@ -155,7 +155,7 @@ class OCLintSensorTest {
     fun execute_withReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.xml")
         createReportFile("sample.xml", "oclint.xml")
-        val expected = SampleReport.build().sorted()
+        val expected = SampleReport.build()
 
         sensor.execute(context)
 
@@ -167,7 +167,7 @@ class OCLintSensorTest {
     fun execute_withJsonReportPath() {
         settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.json")
         createReportFile("sample.json", "oclint.json")
-        val expected = SampleReport.build().sorted()
+        val expected = SampleReport.build()
 
         sensor.execute(context)
 
