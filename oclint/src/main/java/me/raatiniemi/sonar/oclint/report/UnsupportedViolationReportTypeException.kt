@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint.report;
+package me.raatiniemi.sonar.oclint.report
 
-class UnsupportedViolationReportTypeException extends RuntimeException {
-}
+internal class UnsupportedViolationReportTypeException : RuntimeException()

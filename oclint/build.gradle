@@ -17,6 +17,7 @@
 
 plugins {
     id 'java'
+    id 'kotlin'
     id 'maven-publish'
     id 'com.jfrog.bintray' version '1.8.4'
 }
@@ -40,6 +41,7 @@ dependencies {
     compileOnly 'org.sonarsource.sonarqube:sonar-plugin-api:7.1'
     compileOnly 'org.slf4j:slf4j-api:1.7.21'
 
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     compile ('org.sonarsource.sslr-squid-bridge:sslr-squid-bridge:2.6.1') {
         exclude(module: 'sslr-core')
         exclude(module: 'sslr-xpath')

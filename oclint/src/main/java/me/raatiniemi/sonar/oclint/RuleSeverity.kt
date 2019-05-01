@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2019 Tobias Raatiniemi
+ * Copyright © 2012 OCTO Technology, Backelite (${email})
+ * Copyright (c) 2018 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,11 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package me.raatiniemi.sonar.oclint
 
-package me.raatiniemi.sonar.oclint.report;
+internal enum class RuleSeverity {
+    INFO,
+    MINOR,
+    MAJOR,
+    CRITICAL,
+    BLOCKER;
 
-class UnableToConfigureXmlReportParserException extends RuntimeException {
-    UnableToConfigureXmlReportParserException(String message, Exception cause) {
-        super(message, cause);
+    companion object {
+        @JvmStatic
+        fun valueOfInt(ordinal: Int): RuleSeverity {
+            return values()[ordinal]
+        }
     }
 }

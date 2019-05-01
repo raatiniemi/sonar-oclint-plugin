@@ -15,12 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint.report;
+package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.core.ReportParser;
-import me.raatiniemi.sonar.oclint.Violation;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 
-import java.util.List;
-
-public interface ViolationReportParser extends ReportParser<List<Violation>> {
+@JsonIgnoreProperties(ignoreUnknown = true)
+internal data class JsonReport(
+    @JsonProperty("violation")
+    val violations: List<Violation>
+) {
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    internal data class Violation(
+        @JsonProperty("path")
+        val path: String,
+        @JsonProperty("startLine")
+        val startLine: Int,
+        @JsonProperty("rule")
+        val rule: String,
+        @JsonProperty("message")
+        val message: String
+    )
 }
