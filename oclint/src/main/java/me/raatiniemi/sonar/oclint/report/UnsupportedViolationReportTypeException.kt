@@ -15,10 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint.report;
+package me.raatiniemi.sonar.oclint.report
 
-class UnableToConfigureXmlReportParserException extends RuntimeException {
-    UnableToConfigureXmlReportParserException(String message, Exception cause) {
-        super(message, cause);
-    }
-}
+internal class UnsupportedViolationReportTypeException : RuntimeException()
