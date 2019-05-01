@@ -28,7 +28,7 @@ import java.util.Objects;
 import java.util.Set;
 
 final class RuleDefinitionParser {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OCLintRulesDefinition.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RuleDefinitionParser.class);
 
     private RuleDefinitionParser() {
     }
