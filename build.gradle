@@ -47,6 +47,15 @@ allprojects {
     }
 }
 
+detekt {
+    config = files("${projectDir}/.detekt.yml")
+    filters = '.*/resources/.*,.*/build/.*'
+    input = files(
+            'oclint/src',
+            'update-rules/src'
+    )
+}
+
 ext {
     projectVersion = project.version
 }
