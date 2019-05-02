@@ -35,7 +35,17 @@ buildscript {
     }
 }
 
+plugins {
+    id 'io.gitlab.arturbosch.detekt' version '1.0.0-RC14'
+}
+
 apply plugin: 'com.cinnober.gradle.semver-git'
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
 
 ext {
     projectVersion = project.version
