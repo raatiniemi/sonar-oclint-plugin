@@ -29,17 +29,15 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.cinnober.gradle:semver-git:2.3.1'
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
 plugins {
+    id 'com.cinnober.gradle.semver-git' version '2.3.1'
     id 'io.gitlab.arturbosch.detekt' version '1.0.0-RC14'
 }
-
-apply plugin: 'com.cinnober.gradle.semver-git'
 
 allprojects {
     repositories {
