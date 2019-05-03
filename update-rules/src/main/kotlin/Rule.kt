@@ -22,7 +22,7 @@ internal data class Rule(
         val name: String,
         val description: String,
         val category: String,
-        val severity: Int
+        val severity: RuleSeverity
 ) {
     val key = name.toLowerCase()
     val type = {

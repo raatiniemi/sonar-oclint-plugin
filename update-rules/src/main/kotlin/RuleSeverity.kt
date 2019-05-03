@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,8 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-internal data class RuleCategory(val name: String, val severity: RuleSeverity)
-
-internal fun basenamePath(category: RuleCategory): String {
-    return "${category.name.toLowerCase()}.html"
+internal enum class RuleSeverity {
+    INFO,
+    MINOR,
+    MAJOR,
+    CRITICAL,
+    BLOCKER;
 }

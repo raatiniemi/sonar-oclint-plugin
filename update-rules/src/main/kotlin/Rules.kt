@@ -76,7 +76,9 @@ enum class Rules(val ruleName: String) {
     TOO_MANY_FIELDS("too many fields"),
     TOO_MANY_METHODS("too many methods"),
     TOO_MANY_PARAMETERS("too many parameters"),
-    UNNECESSARY_DEFAULT_STATEMENT_IN_COVERED_SWITCH_STATEMENT("unnecessary default statement in covered switch statement"),
+    UNNECESSARY_DEFAULT_STATEMENT_IN_COVERED_SWITCH_STATEMENT(
+        "unnecessary default statement in covered switch statement"
+    ),
     UNNECESSARY_ELSE_STATEMENT("unnecessary else statement"),
     UNNECESSARY_NULL_CHECK_FOR_DEALLOC("unnecessary null check for dealloc"),
     UNUSED_LOCAL_VARIABLE("unused local variable"),

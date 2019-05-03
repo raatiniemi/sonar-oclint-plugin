@@ -37,6 +37,7 @@ class ViolationComparableTest(
     }
 
     companion object {
+        @Suppress("LongMethod")
         @JvmStatic
         @Parameterized.Parameters
         fun parameters() = listOf<Array<Any>>(
