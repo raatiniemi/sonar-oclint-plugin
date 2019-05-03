@@ -25,11 +25,11 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
 
-private const val pathToReadMe = "README.md"
-private const val pathToRules = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
-private const val pathToProfile = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile-oclint.xml"
+private const val PATH_TO_READ_ME = "README.md"
+private const val PATH_TO_RULES = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
+private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile-oclint.xml"
 
-private const val baseUrl = "http://docs.oclint.org/en/stable/rules"
+private const val BASE_URL = "http://docs.oclint.org/en/stable/rules"
 private val availableRuleCategoriesWithSeverity = mapOf(
         "Basic" to 3,
         "Cocoa" to 1,
@@ -44,7 +44,7 @@ private val availableRuleCategoriesWithSeverity = mapOf(
 )
 
 fun main(args: Array<String>) {
-    FuelManager.instance.basePath = baseUrl
+    FuelManager.instance.basePath = BASE_URL
 
     writeVersionToReadMe(readVersion())
     listRuleCategoriesWithMissingSeverity(nameForAvailableRuleCategories())
@@ -64,7 +64,7 @@ fun main(args: Array<String>) {
 }
 
 private fun writeRulesToFile(rules: List<Rule>) {
-    File(pathToRules).printWriter()
+    File(PATH_TO_RULES).printWriter()
             .use { out ->
                 out.println(headerTemplate())
 
@@ -88,7 +88,7 @@ private fun writeProfileToFile(profile: Profile) {
     val mapper = XmlMapper(module)
     mapper.enable(SerializationFeature.INDENT_OUTPUT)
 
-    File(pathToProfile).printWriter()
+    File(PATH_TO_PROFILE).printWriter()
             .use { out ->
                 out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
                 out.println(mapper.writeValueAsString(profile))
@@ -108,7 +108,7 @@ private fun readVersion(): String {
 }
 
 private fun writeVersionToReadMe(version: String) {
-    File(pathToReadMe).run {
+    File(PATH_TO_READ_ME).run {
         readLines()
                 .map {
                     val regex = """oclint-([\d\.]+)-blue""".toRegex()
