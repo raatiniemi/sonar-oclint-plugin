@@ -29,6 +29,8 @@ sonarqube {
 
         properties['sonar.sourceEncoding'] = 'UTF-8'
         properties['sonar.scm.provider'] = 'git'
+
+        properties['sonar.kotlin.detekt.reportPaths'] = "${project.rootDir}/build/reports/detekt.xml"
     }
 }
 
