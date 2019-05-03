@@ -30,7 +30,7 @@ build:
 test:
   stage: test
   script:
-    - gradle test
+    - gradle test detekt
   except:
     - master
   artifacts:
@@ -41,7 +41,7 @@ test:
 analyse:
   stage: test
   script:
-    - gradle sonarqube
+    - gradle detekt sonarqube
   only:
     - master
   artifacts:
