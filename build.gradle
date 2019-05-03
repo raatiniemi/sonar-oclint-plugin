@@ -54,6 +54,15 @@ detekt {
             "${projectDir}/oclint/src",
             "${projectDir}/update-rules/src"
     )
+    reports {
+        xml {
+            enabled = true
+            destination = file('build/reports/detekt.xml')
+        }
+        html {
+            enabled = false
+        }
+    }
 }
 
 ext {
