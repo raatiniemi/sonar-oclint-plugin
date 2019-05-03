@@ -22,7 +22,7 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class RuleTest {
-    private val ruleCategory = RuleCategory("category name", 2)
+    private val ruleCategory = RuleCategory("category name", RuleSeverity.MAJOR)
 
     @Test
     fun from_simpleRuleDescription() {
