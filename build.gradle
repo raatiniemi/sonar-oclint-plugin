@@ -48,11 +48,11 @@ allprojects {
 }
 
 detekt {
-    config = files("${projectDir}/.detekt.yml")
+    config = files("${project.rootDir}/.detekt.yml")
     filters = '.*/resources/.*,.*/build/.*'
     input = files(
-            'oclint/src',
-            'update-rules/src'
+            "${projectDir}/oclint/src",
+            "${projectDir}/update-rules/src"
     )
 }
 
