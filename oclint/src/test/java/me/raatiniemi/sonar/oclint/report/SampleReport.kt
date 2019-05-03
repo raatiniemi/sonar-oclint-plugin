@@ -32,6 +32,7 @@ object SampleReport {
     private const val UNUSED_METHOD_PARAMETER_RULE_NAME = "unused method parameter"
     private const val PARAMETER_REASSIGNMENT_RULE_NAME = "parameter reassignment"
 
+    @Suppress("LongMethod")
     fun build(): List<Violation> {
         val violations = listOf(
             buildViolation(
