@@ -30,7 +30,7 @@ internal fun ruleTemplate(it: Rule): String {
             "----------\n\n" +
             "Summary: Name: ${it.name.toLowerCase()}\n" +
             "${it.description}\n\n" +
-            "Severity: ${it.severity}\n" +
+            "Severity: ${it.severity.ordinal}\n" +
             "Type: ${it.type}\n" +
             "Category: OCLint\n"
 }

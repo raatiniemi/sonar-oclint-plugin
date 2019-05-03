@@ -31,16 +31,16 @@ private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/son
 
 private const val BASE_URL = "http://docs.oclint.org/en/stable/rules"
 private val availableRuleCategoriesWithSeverity = mapOf(
-        "Basic" to 3,
-        "Cocoa" to 1,
-        "Convention" to 2,
-        "Design" to 2,
-        "Empty" to 3,
-        "Migration" to 1,
-        "Naming" to 2,
-        "Redundant" to 1,
-        "Size" to 3,
-        "Unused" to 0
+        "Basic" to RuleSeverity.CRITICAL,
+        "Cocoa" to RuleSeverity.MINOR,
+        "Convention" to RuleSeverity.MAJOR,
+        "Design" to RuleSeverity.MAJOR,
+        "Empty" to RuleSeverity.CRITICAL,
+        "Migration" to RuleSeverity.MINOR,
+        "Naming" to RuleSeverity.MAJOR,
+        "Redundant" to RuleSeverity.MINOR,
+        "Size" to RuleSeverity.CRITICAL,
+        "Unused" to RuleSeverity.INFO
 )
 
 fun main(args: Array<String>) {
