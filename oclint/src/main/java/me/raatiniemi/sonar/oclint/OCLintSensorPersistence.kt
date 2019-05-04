@@ -17,7 +17,7 @@
  */
 package me.raatiniemi.sonar.oclint
 
-import me.raatiniemi.sonar.core.SensorPersistence
+import org.sonar.api.batch.fs.FilePredicate
 import org.sonar.api.batch.fs.FileSystem
 import org.sonar.api.batch.fs.InputFile
 import org.sonar.api.batch.sensor.SensorContext
@@ -26,10 +26,10 @@ import org.sonar.api.utils.log.Loggers
 import java.util.*
 
 internal class OCLintSensorPersistence private constructor(
-    context: SensorContext,
+    private val context: SensorContext,
     private val fileSystem: FileSystem
-) : SensorPersistence<Violation>(context) {
-    override fun saveMeasures(measures: Collection<Violation>) = measures.groupBy { it.path }
+) {
+    fun saveMeasures(measures: Collection<Violation>) = measures.groupBy { it.path }
         .forEach { (path, violations) ->
             saveViolationsGroupedByFile(path, violations)
         }
@@ -57,6 +57,27 @@ internal class OCLintSensorPersistence private constructor(
 
     private fun buildInputFile(path: String): Optional<InputFile> {
         return buildInputFile(fileSystem.predicates().hasPath(path), path)
+    }
+
+    private fun buildInputFile(filePredicate: FilePredicate, name: String): Optional<InputFile> {
+        val inputFile = context.fileSystem().inputFile(filePredicate)
+        if (null == inputFile) {
+            LOGGER.warn("No path available for {}", name)
+            return Optional.empty()
+        }
+
+        val language = inputFile.language()
+        if (null == language) {
+            LOGGER.debug("No language is available for {}", name)
+            return Optional.empty()
+        }
+
+        if (!language.toLowerCase().contains("objc")) {
+            LOGGER.debug("{} belong to language {}", name, language)
+            return Optional.empty()
+        }
+
+        return Optional.of(inputFile)
     }
 
     private fun isRuleActive(rule: RuleKey): Boolean {
