@@ -38,7 +38,7 @@ import java.util.*
         project = true
     )
 )
-class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
+class OCLintSensor(private val configuration: Configuration) : ReportSensor(configuration) {
     private val reportParserFactory = ReportParserFactory.create()
 
     override fun describe(descriptor: SensorDescriptor) {
@@ -59,7 +59,7 @@ class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
 
     private fun findReport(projectDirectory: File): Optional<File> {
         return ReportFinder.create(projectDirectory)
-            .findReportMatching(readReportPath())
+            .findReportMatching(readReportPath(configuration))
     }
 
     private fun parseReport(reportFile: File): List<Violation> {
