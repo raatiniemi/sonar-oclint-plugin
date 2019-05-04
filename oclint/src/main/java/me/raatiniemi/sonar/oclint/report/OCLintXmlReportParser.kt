@@ -16,17 +16,38 @@
  */
 package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.core.xml.XmlReportParser
 import me.raatiniemi.sonar.oclint.Violation
 import org.sonar.api.utils.log.Loggers
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import org.xml.sax.SAXException
+import java.io.File
+import java.io.IOException
+import java.util.*
 import javax.xml.parsers.DocumentBuilder
 
-class OCLintXmlReportParser internal constructor(documentBuilder: DocumentBuilder) :
-    XmlReportParser<List<Violation>>(documentBuilder), ViolationReportParser {
+internal class OCLintXmlReportParser(private val documentBuilder: DocumentBuilder) : ViolationReportParser {
+    override fun parse(reportFile: File): Optional<List<Violation>> {
+        if (!reportFile.exists()) {
+            LOGGER.warn("No XML report exist at path: {}", reportFile)
+            return Optional.empty()
+        }
 
-    override fun parse(document: Document): List<Violation> {
+        return try {
+            val document = documentBuilder.parse(reportFile)
+            val report = parse(document)
+
+            Optional.of(report)
+        } catch (e: SAXException) {
+            LOGGER.error("Unable to process XML file named: {}", reportFile, e)
+            Optional.empty()
+        } catch (e: IOException) {
+            LOGGER.error("Unable to process XML file named: {}", reportFile, e)
+            Optional.empty()
+        }
+    }
+
+    private fun parse(document: Document): List<Violation> {
         return getViolationElements(document)
             .map { buildViolation(it) }
     }
