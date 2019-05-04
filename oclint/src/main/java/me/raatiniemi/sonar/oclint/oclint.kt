@@ -21,12 +21,16 @@ import org.sonar.api.config.Configuration
 
 internal fun readReportPath(configuration: Configuration): Pair<String, String> {
     val keys = listOf(CONFIG_REPORT_PATH_KEY, DEPRECATED_CONFIG_REPORT_PATH_KEY)
-    val reportPath = keys.filter { configuration.hasKey(it) }
-        .mapNotNull(readKey(configuration))
-        .firstOrNull()
 
-    return reportPath ?: Pair("none", CONFIG_REPORT_PATH_DEFAULT_VALUE)
+    return readFirstKey(configuration, keys) ?: Pair("none", CONFIG_REPORT_PATH_DEFAULT_VALUE)
 }
+
+private fun readFirstKey(configuration: Configuration, keys: List<String>) =
+    readKeys(configuration, keys).firstOrNull()
+
+private fun readKeys(configuration: Configuration, keys: List<String>) =
+    keys.filter { configuration.hasKey(it) }
+        .mapNotNull(readKey(configuration))
 
 private fun readKey(configuration: Configuration): (String) -> Pair<String, String>? {
     return { key ->
