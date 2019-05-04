@@ -33,7 +33,7 @@ class OCLintKtTest {
 
     @Test
     fun `read report path without value for keys`() {
-        val expected = CONFIG_REPORT_PATH_DEFAULT_VALUE
+        val expected = Pair("none", CONFIG_REPORT_PATH_DEFAULT_VALUE)
 
         val actual = readReportPath(configuration)
 
@@ -42,8 +42,8 @@ class OCLintKtTest {
 
     @Test
     fun `read report path with value for key`() {
-        val expected = "oclint.xml"
-        settings.setProperty(CONFIG_REPORT_PATH_KEY, expected)
+        val expected = Pair(CONFIG_REPORT_PATH_KEY, "oclint.xml")
+        settings.setProperty(CONFIG_REPORT_PATH_KEY, "oclint.xml")
 
         val actual = readReportPath(configuration)
 
@@ -52,8 +52,8 @@ class OCLintKtTest {
 
     @Test
     fun `read report path with value for deprecated key`() {
-        val expected = "oclint.xml"
-        settings.setProperty(DEPRECATED_CONFIG_REPORT_PATH_KEY, expected)
+        val expected = Pair(DEPRECATED_CONFIG_REPORT_PATH_KEY, "oclint.xml")
+        settings.setProperty(DEPRECATED_CONFIG_REPORT_PATH_KEY, "oclint.xml")
 
         val actual = readReportPath(configuration)
 
@@ -62,8 +62,8 @@ class OCLintKtTest {
 
     @Test
     fun `read report path with value for both keys`() {
-        val expected = "oclint.xml"
-        settings.setProperty(CONFIG_REPORT_PATH_KEY, expected)
+        val expected = Pair(CONFIG_REPORT_PATH_KEY, "oclint.xml")
+        settings.setProperty(CONFIG_REPORT_PATH_KEY, "oclint.xml")
         settings.setProperty(DEPRECATED_CONFIG_REPORT_PATH_KEY, "deprecated.xml")
 
         val actual = readReportPath(configuration)

@@ -17,11 +17,11 @@
 
 package me.raatiniemi.sonar.oclint
 
-const val CONFIG_REPORT_PATH_KEY = "sonar.oclint.reportPath"
+const val CONFIG_REPORT_PATH_KEY = "sonar.oclint.value"
 const val CONFIG_REPORT_PATH_DEFAULT_VALUE = "sonar-reports/oclint.xml"
 const val CONFIG_REPORT_PATH_NAME = "Path to OCLint violation report"
 const val CONFIG_REPORT_PATH_DESCRIPTION = "Relative to projects' root."
 
-const val DEPRECATED_CONFIG_REPORT_PATH_KEY = "sonar.objectivec.oclint.reportPath"
+const val DEPRECATED_CONFIG_REPORT_PATH_KEY = "sonar.objectivec.oclint.value"
 const val DEPRECATED_CONFIG_REPORT_PATH_DESCRIPTION =
-    "Relative to projects' root, deprecated use `sonar.oclint.reportPath` instead."
+    "Relative to projects' root, deprecated use `sonar.oclint.value` instead."

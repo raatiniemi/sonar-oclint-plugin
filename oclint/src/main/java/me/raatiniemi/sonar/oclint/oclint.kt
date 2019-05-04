@@ -19,19 +19,19 @@ package me.raatiniemi.sonar.oclint
 
 import org.sonar.api.config.Configuration
 
-internal fun readReportPath(configuration: Configuration): String {
+internal fun readReportPath(configuration: Configuration): Pair<String, String> {
     val keys = listOf(CONFIG_REPORT_PATH_KEY, DEPRECATED_CONFIG_REPORT_PATH_KEY)
     val reportPath = keys.filter { configuration.hasKey(it) }
         .mapNotNull(readKey(configuration))
         .firstOrNull()
 
-    return reportPath ?: CONFIG_REPORT_PATH_DEFAULT_VALUE
+    return reportPath ?: Pair("none", CONFIG_REPORT_PATH_DEFAULT_VALUE)
 }
 
-private fun readKey(configuration: Configuration): (String) -> String? {
+private fun readKey(configuration: Configuration): (String) -> Pair<String, String>? {
     return { key ->
         configuration.get(key)
             .takeIf { it.isPresent }
-            .let { it?.get() }
+            ?.let { Pair(key, it.get()) }
     }
 }

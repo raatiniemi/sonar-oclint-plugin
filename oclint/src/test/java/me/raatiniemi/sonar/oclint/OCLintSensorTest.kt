@@ -36,6 +36,8 @@ import org.sonar.api.batch.sensor.issue.Issue
 import org.sonar.api.batch.sensor.issue.IssueLocation
 import org.sonar.api.config.internal.MapSettings
 import org.sonar.api.rule.RuleKey
+import org.sonar.api.utils.log.LogTester
+import org.sonar.api.utils.log.LoggerLevel
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -48,6 +50,10 @@ class OCLintSensorTest {
     @Rule
     @JvmField
     var temporaryFolder = TemporaryFolder()
+
+    @Rule
+    @JvmField
+    var logTester = LogTester()
 
     private lateinit var context: SensorContextTester
     private lateinit var sensor: OCLintSensor
@@ -141,19 +147,20 @@ class OCLintSensorTest {
     }
 
     @Test
-    fun execute_withDefaultReportPath() {
-        createReportFile("sample.xml", "sonar-reports/oclint.xml")
+    fun `execute without value for report path keys`() {
+        createReportFile("sample.xml", CONFIG_REPORT_PATH_DEFAULT_VALUE)
         val expected = SampleReport.build()
 
         sensor.execute(context)
 
         val actual = transformIssuesToViolations(context.allIssues())
         assertEquals(expected, actual)
+        assertTrue(logTester.logs().contains("Found no report path, using default path"))
     }
 
     @Test
-    fun execute_withReportPath() {
-        settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.xml")
+    fun `execute with xml report path`() {
+        settings.setProperty(CONFIG_REPORT_PATH_KEY, "oclint.xml")
         createReportFile("sample.xml", "oclint.xml")
         val expected = SampleReport.build()
 
@@ -161,11 +168,12 @@ class OCLintSensorTest {
 
         val actual = transformIssuesToViolations(context.allIssues())
         assertEquals(expected, actual)
+        assertTrue(logTester.logs(LoggerLevel.WARN).isEmpty())
     }
 
     @Test
-    fun execute_withJsonReportPath() {
-        settings.setProperty("sonar.objectivec.oclint.reportPath", "oclint.json")
+    fun `execute with json report path`() {
+        settings.setProperty(CONFIG_REPORT_PATH_KEY, "oclint.json")
         createReportFile("sample.json", "oclint.json")
         val expected = SampleReport.build()
 
@@ -173,5 +181,38 @@ class OCLintSensorTest {
 
         val actual = transformIssuesToViolations(context.allIssues())
         assertEquals(expected, actual)
+        assertTrue(logTester.logs(LoggerLevel.WARN).isEmpty())
+    }
+
+    @Test
+    fun `execute with xml report path for deprecated key`() {
+        settings.setProperty(DEPRECATED_CONFIG_REPORT_PATH_KEY, "oclint.xml")
+        createReportFile("sample.xml", "oclint.xml")
+        val expected = SampleReport.build()
+
+        sensor.execute(context)
+
+        val actual = transformIssuesToViolations(context.allIssues())
+        assertEquals(expected, actual)
+        assertTrue(
+            logTester.logs(LoggerLevel.WARN)
+                .contains("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
+        )
+    }
+
+    @Test
+    fun `execute with json report path for deprecated key`() {
+        settings.setProperty(DEPRECATED_CONFIG_REPORT_PATH_KEY, "oclint.json")
+        createReportFile("sample.json", "oclint.json")
+        val expected = SampleReport.build()
+
+        sensor.execute(context)
+
+        val actual = transformIssuesToViolations(context.allIssues())
+        assertEquals(expected, actual)
+        assertTrue(
+            logTester.logs(LoggerLevel.WARN)
+                .contains("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
+        )
     }
 }

@@ -25,6 +25,7 @@ import org.sonar.api.Property
 import org.sonar.api.batch.sensor.SensorContext
 import org.sonar.api.batch.sensor.SensorDescriptor
 import org.sonar.api.config.Configuration
+import org.sonar.api.utils.log.Loggers
 import java.io.File
 import java.util.*
 
@@ -66,8 +67,17 @@ class OCLintSensor(private val configuration: Configuration) : ReportSensor(conf
         .orElse(emptyList())
 
     private fun findReport(projectDirectory: File): Optional<File> {
+        val (key, reportPath) = readReportPath(configuration)
+        when (key) {
+            CONFIG_REPORT_PATH_KEY -> Unit
+            DEPRECATED_CONFIG_REPORT_PATH_KEY -> {
+                LOGGER.warn("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
+            }
+            else -> LOGGER.debug("Found no report path, using default path")
+        }
+
         return ReportFinder.create(projectDirectory)
-            .findReportMatching(readReportPath(configuration))
+            .findReportMatching(reportPath)
     }
 
     private fun parseReport(reportFile: File): List<Violation> {
@@ -82,6 +92,7 @@ class OCLintSensor(private val configuration: Configuration) : ReportSensor(conf
     override fun getDefaultReportPath() = CONFIG_REPORT_PATH_DEFAULT_VALUE
 
     companion object {
+        private val LOGGER = Loggers.get(OCLintSensor::class.java)
         private const val NAME = "OCLint violation sensor"
     }
 }
