@@ -28,20 +28,18 @@ internal fun getElements(document: Document, tagName: String): Collection<Elemen
     return parseElementsFromNodeList(nodeList)
 }
 
-private fun parseElementsFromNodeList(nodeList: NodeList): Collection<Element> {
-    val elements = mutableListOf<Element>()
+private fun parseElementsFromNodeList(nodeList: NodeList) =
+    (0 until nodeList.length)
+        .mapNotNull(findElement(nodeList))
+        .toList()
 
-    for (i in 0 until nodeList.length) {
-        val node = nodeList.item(i)
-        if (isNotElement(node)) {
-            continue
-        }
-
-        val element = node as Element
-        elements.add(element)
+private fun findElement(nodeList: NodeList): (Int) -> Element? = {
+    val node = nodeList.item(it)
+    if (isElement(node)) {
+        node as Element
+    } else {
+        null
     }
-
-    return elements
 }
 
-private fun isNotElement(node: Node) = node.nodeType != Node.ELEMENT_NODE
+private fun isElement(node: Node) = node.nodeType == Node.ELEMENT_NODE
