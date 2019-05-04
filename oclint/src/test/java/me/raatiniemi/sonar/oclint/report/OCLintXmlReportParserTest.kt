@@ -70,7 +70,10 @@ class OCLintXmlReportParserTest {
         val actual = parser.parse(documentPath.toFile())
 
         assertEquals(expected, actual)
-        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"))
+        assertTrue(
+            logTester.logs(LoggerLevel.WARN)
+                .contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m")
+        )
     }
 
     @Test
