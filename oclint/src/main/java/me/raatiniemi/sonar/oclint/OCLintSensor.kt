@@ -30,10 +30,10 @@ import java.util.*
 
 @Properties(
     Property(
-        key = OCLintSensor.REPORT_PATH_KEY,
-        defaultValue = OCLintSensor.DEFAULT_REPORT_PATH,
-        name = "Path to OCLint violation report",
-        description = "Relative to projects' root.",
+        key = CONFIG_REPORT_PATH_KEY,
+        defaultValue = CONFIG_REPORT_PATH_DEFAULT_VALUE,
+        name = CONFIG_REPORT_PATH_NAME,
+        description = CONFIG_REPORT_PATH_DESCRIPTION,
         global = false,
         project = true
     )
@@ -69,14 +69,11 @@ class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
         return violations.orElse(emptyList())
     }
 
-    override fun getReportPathKey() = REPORT_PATH_KEY
+    override fun getReportPathKey() = CONFIG_REPORT_PATH_KEY
 
-    override fun getDefaultReportPath() = DEFAULT_REPORT_PATH
+    override fun getDefaultReportPath() = CONFIG_REPORT_PATH_DEFAULT_VALUE
 
     companion object {
-        const val REPORT_PATH_KEY = "sonar.objectivec.oclint.reportPath"
-        const val DEFAULT_REPORT_PATH = "sonar-reports/oclint.xml"
-
         private const val NAME = "OCLint violation sensor"
     }
 }
