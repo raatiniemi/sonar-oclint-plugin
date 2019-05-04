@@ -17,7 +17,10 @@
 
 package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.core.ReportParser
 import me.raatiniemi.sonar.oclint.Violation
+import java.io.File
+import java.util.*
 
-interface ViolationReportParser : ReportParser<List<Violation>>
+interface ViolationReportParser {
+    fun parse(reportFile: File): Optional<List<Violation>>
+}
