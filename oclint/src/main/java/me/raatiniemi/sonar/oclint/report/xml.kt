@@ -17,9 +17,29 @@
 
 package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.oclint.Violation
-import java.io.File
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 
-interface ViolationReportParser {
-    fun parse(reportFile: File): List<Violation>
+internal fun getElements(document: Document, tagName: String): Collection<Element> {
+    val nodeList = document.getElementsByTagName(tagName)
+
+    return parseElementsFromNodeList(nodeList)
 }
+
+private fun parseElementsFromNodeList(nodeList: NodeList) =
+    (0 until nodeList.length)
+        .mapNotNull(findElement(nodeList))
+        .toList()
+
+private fun findElement(nodeList: NodeList): (Int) -> Element? = {
+    val node = nodeList.item(it)
+    if (isElement(node)) {
+        node as Element
+    } else {
+        null
+    }
+}
+
+private fun isElement(node: Node) = node.nodeType == Node.ELEMENT_NODE

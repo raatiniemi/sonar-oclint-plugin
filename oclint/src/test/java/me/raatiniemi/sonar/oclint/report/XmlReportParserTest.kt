@@ -30,29 +30,29 @@ import java.nio.file.Paths
 import javax.xml.parsers.DocumentBuilderFactory
 
 @RunWith(JUnit4::class)
-class OCLintXmlReportParserTest {
+class XmlReportParserTest {
     private val resourcePath = Paths.get("src", "test", "resources", "oclint", "report")
 
     @Rule
     @JvmField
     var logTester = LogTester()
 
-    private lateinit var parser: OCLintXmlReportParser
+    private lateinit var parser: XmlReportParser
 
     @Before
     fun setUp() {
         val factory = DocumentBuilderFactory.newInstance()
-        parser = OCLintXmlReportParser(factory.newDocumentBuilder())
+        parser = XmlReportParser(factory.newDocumentBuilder())
     }
 
     @Test
     fun parse_withEmptyDocument() {
         val documentPath = Paths.get(resourcePath.toString(), "empty.xml")
+        val expected = emptyList<Violation>()
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertTrue(actual.get().isEmpty())
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -69,9 +69,11 @@ class OCLintXmlReportParserTest {
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get())
-        assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"))
+        assertEquals(expected, actual)
+        assertTrue(
+            logTester.logs(LoggerLevel.WARN)
+                .contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m")
+        )
     }
 
     @Test
@@ -81,7 +83,6 @@ class OCLintXmlReportParserTest {
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get().sorted())
+        assertEquals(expected, actual.sorted())
     }
 }

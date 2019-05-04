@@ -16,23 +16,41 @@
  */
 package me.raatiniemi.sonar.oclint.report
 
-import me.raatiniemi.sonar.core.xml.XmlReportParser
 import me.raatiniemi.sonar.oclint.Violation
 import org.sonar.api.utils.log.Loggers
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import org.xml.sax.SAXException
+import java.io.File
+import java.io.IOException
 import javax.xml.parsers.DocumentBuilder
 
-class OCLintXmlReportParser internal constructor(documentBuilder: DocumentBuilder) :
-    XmlReportParser<List<Violation>>(documentBuilder), ViolationReportParser {
+internal class XmlReportParser(private val documentBuilder: DocumentBuilder) : ViolationReportParser {
+    override fun parse(reportFile: File): List<Violation> {
+        if (!reportFile.exists()) {
+            LOGGER.warn("No XML report exist at path: {}", reportFile)
+            return emptyList()
+        }
 
-    override fun parse(document: Document): List<Violation> {
+        return try {
+            val document = documentBuilder.parse(reportFile)
+            parse(document)
+        } catch (e: SAXException) {
+            LOGGER.error("Unable to process XML file named: {}", reportFile, e)
+            emptyList()
+        } catch (e: IOException) {
+            LOGGER.error("Unable to process XML file named: {}", reportFile, e)
+            emptyList()
+        }
+    }
+
+    private fun parse(document: Document): List<Violation> {
         return getViolationElements(document)
             .map { buildViolation(it) }
     }
 
     companion object {
-        private val LOGGER = Loggers.get(OCLintXmlReportParser::class.java)
+        private val LOGGER = Loggers.get(XmlReportParser::class.java)
 
         private const val VIOLATION = "violation"
         private const val PATH = "path"

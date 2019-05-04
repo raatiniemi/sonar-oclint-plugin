@@ -37,8 +37,8 @@ class ReportParserFactory private constructor() {
         throw UnsupportedViolationReportTypeException()
     }
 
-    private fun buildXmlReportParser(): OCLintXmlReportParser {
-        return OCLintXmlReportParser(createDocumentBuilder())
+    private fun buildXmlReportParser(): XmlReportParser {
+        return XmlReportParser(createDocumentBuilder())
     }
 
     private fun createDocumentBuilder(): DocumentBuilder {

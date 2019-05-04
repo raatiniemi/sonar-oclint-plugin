@@ -22,18 +22,16 @@ import me.raatiniemi.sonar.oclint.Violation
 import org.sonar.api.utils.log.Loggers
 import java.io.File
 import java.io.IOException
-import java.util.*
 
 internal class JsonReportParser(private val objectMapper: ObjectMapper) : ViolationReportParser {
-    override fun parse(reportFile: File): Optional<List<Violation>> {
+    override fun parse(reportFile: File): List<Violation> {
         return try {
             val report = objectMapper.readValue(reportFile, JsonReport::class.java)
-            val violations = report.violations.map { transformToViolation(it) }
 
-            Optional.of(violations)
+            report.violations.map { transformToViolation(it) }
         } catch (e: IOException) {
             LOGGER.warn("Unable to parse report file: ${reportFile.path}")
-            Optional.empty()
+            emptyList()
         }
     }
 
