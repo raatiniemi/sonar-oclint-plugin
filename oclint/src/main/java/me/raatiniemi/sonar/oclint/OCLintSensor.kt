@@ -18,27 +18,36 @@
 package me.raatiniemi.sonar.oclint
 
 import me.raatiniemi.sonar.core.ReportFinder
-import me.raatiniemi.sonar.core.ReportSensor
 import me.raatiniemi.sonar.oclint.report.ReportParserFactory
 import org.sonar.api.Properties
 import org.sonar.api.Property
+import org.sonar.api.batch.sensor.Sensor
 import org.sonar.api.batch.sensor.SensorContext
 import org.sonar.api.batch.sensor.SensorDescriptor
 import org.sonar.api.config.Configuration
+import org.sonar.api.utils.log.Loggers
 import java.io.File
 import java.util.*
 
 @Properties(
     Property(
-        key = OCLintSensor.REPORT_PATH_KEY,
-        defaultValue = OCLintSensor.DEFAULT_REPORT_PATH,
-        name = "Path to OCLint violation report",
-        description = "Relative to projects' root.",
+        key = CONFIG_REPORT_PATH_KEY,
+        defaultValue = CONFIG_REPORT_PATH_DEFAULT_VALUE,
+        name = CONFIG_REPORT_PATH_NAME,
+        description = CONFIG_REPORT_PATH_DESCRIPTION,
+        global = false,
+        project = true
+    ),
+    Property(
+        key = DEPRECATED_CONFIG_REPORT_PATH_KEY,
+        defaultValue = CONFIG_REPORT_PATH_DEFAULT_VALUE,
+        name = CONFIG_REPORT_PATH_NAME,
+        description = DEPRECATED_CONFIG_REPORT_PATH_DESCRIPTION,
         global = false,
         project = true
     )
 )
-class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
+class OCLintSensor(private val configuration: Configuration) : Sensor {
     private val reportParserFactory = ReportParserFactory.create()
 
     override fun describe(descriptor: SensorDescriptor) {
@@ -58,8 +67,17 @@ class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
         .orElse(emptyList())
 
     private fun findReport(projectDirectory: File): Optional<File> {
+        val (key, reportPath) = readReportPath(configuration)
+        when (key) {
+            CONFIG_REPORT_PATH_KEY -> Unit
+            DEPRECATED_CONFIG_REPORT_PATH_KEY -> {
+                LOGGER.warn("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
+            }
+            else -> LOGGER.debug("Found no report path, using default path")
+        }
+
         return ReportFinder.create(projectDirectory)
-            .findReportMatching(readReportPath())
+            .findReportMatching(reportPath)
     }
 
     private fun parseReport(reportFile: File): List<Violation> {
@@ -69,14 +87,8 @@ class OCLintSensor(configuration: Configuration) : ReportSensor(configuration) {
         return violations.orElse(emptyList())
     }
 
-    override fun getReportPathKey() = REPORT_PATH_KEY
-
-    override fun getDefaultReportPath() = DEFAULT_REPORT_PATH
-
     companion object {
-        const val REPORT_PATH_KEY = "sonar.objectivec.oclint.reportPath"
-        const val DEFAULT_REPORT_PATH = "sonar-reports/oclint.xml"
-
+        private val LOGGER = Loggers.get(OCLintSensor::class.java)
         private const val NAME = "OCLint violation sensor"
     }
 }
