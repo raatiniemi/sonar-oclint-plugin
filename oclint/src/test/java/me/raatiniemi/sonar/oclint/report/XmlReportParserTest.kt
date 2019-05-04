@@ -30,19 +30,19 @@ import java.nio.file.Paths
 import javax.xml.parsers.DocumentBuilderFactory
 
 @RunWith(JUnit4::class)
-class OCLintXmlReportParserTest {
+class XmlReportParserTest {
     private val resourcePath = Paths.get("src", "test", "resources", "oclint", "report")
 
     @Rule
     @JvmField
     var logTester = LogTester()
 
-    private lateinit var parser: OCLintXmlReportParser
+    private lateinit var parser: XmlReportParser
 
     @Before
     fun setUp() {
         val factory = DocumentBuilderFactory.newInstance()
-        parser = OCLintXmlReportParser(factory.newDocumentBuilder())
+        parser = XmlReportParser(factory.newDocumentBuilder())
     }
 
     @Test

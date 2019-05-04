@@ -60,7 +60,7 @@ class ReportParserFactoryTest {
 
         val parser = factory.from(reportFile)
 
-        assertTrue(parser is OCLintXmlReportParser)
+        assertTrue(parser is XmlReportParser)
     }
 
     @Test

@@ -25,7 +25,7 @@ import java.io.File
 import java.io.IOException
 import javax.xml.parsers.DocumentBuilder
 
-internal class OCLintXmlReportParser(private val documentBuilder: DocumentBuilder) : ViolationReportParser {
+internal class XmlReportParser(private val documentBuilder: DocumentBuilder) : ViolationReportParser {
     override fun parse(reportFile: File): List<Violation> {
         if (!reportFile.exists()) {
             LOGGER.warn("No XML report exist at path: {}", reportFile)
@@ -50,7 +50,7 @@ internal class OCLintXmlReportParser(private val documentBuilder: DocumentBuilde
     }
 
     companion object {
-        private val LOGGER = Loggers.get(OCLintXmlReportParser::class.java)
+        private val LOGGER = Loggers.get(XmlReportParser::class.java)
 
         private const val VIOLATION = "violation"
         private const val PATH = "path"
