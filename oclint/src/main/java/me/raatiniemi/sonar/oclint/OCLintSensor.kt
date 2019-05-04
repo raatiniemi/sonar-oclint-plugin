@@ -18,10 +18,10 @@
 package me.raatiniemi.sonar.oclint
 
 import me.raatiniemi.sonar.core.ReportFinder
-import me.raatiniemi.sonar.core.ReportSensor
 import me.raatiniemi.sonar.oclint.report.ReportParserFactory
 import org.sonar.api.Properties
 import org.sonar.api.Property
+import org.sonar.api.batch.sensor.Sensor
 import org.sonar.api.batch.sensor.SensorContext
 import org.sonar.api.batch.sensor.SensorDescriptor
 import org.sonar.api.config.Configuration
@@ -47,7 +47,7 @@ import java.util.*
         project = true
     )
 )
-class OCLintSensor(private val configuration: Configuration) : ReportSensor(configuration) {
+class OCLintSensor(private val configuration: Configuration) : Sensor {
     private val reportParserFactory = ReportParserFactory.create()
 
     override fun describe(descriptor: SensorDescriptor) {
@@ -86,10 +86,6 @@ class OCLintSensor(private val configuration: Configuration) : ReportSensor(conf
 
         return violations.orElse(emptyList())
     }
-
-    override fun getReportPathKey() = CONFIG_REPORT_PATH_KEY
-
-    override fun getDefaultReportPath() = CONFIG_REPORT_PATH_DEFAULT_VALUE
 
     companion object {
         private val LOGGER = Loggers.get(OCLintSensor::class.java)
