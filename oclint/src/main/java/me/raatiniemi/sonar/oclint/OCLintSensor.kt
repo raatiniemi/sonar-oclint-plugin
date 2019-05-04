@@ -36,6 +36,14 @@ import java.util.*
         description = CONFIG_REPORT_PATH_DESCRIPTION,
         global = false,
         project = true
+    ),
+    Property(
+        key = DEPRECATED_CONFIG_REPORT_PATH_KEY,
+        defaultValue = CONFIG_REPORT_PATH_DEFAULT_VALUE,
+        name = CONFIG_REPORT_PATH_NAME,
+        description = DEPRECATED_CONFIG_REPORT_PATH_DESCRIPTION,
+        global = false,
+        project = true
     )
 )
 class OCLintSensor(private val configuration: Configuration) : ReportSensor(configuration) {

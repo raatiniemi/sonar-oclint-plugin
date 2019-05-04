@@ -20,7 +20,7 @@ package me.raatiniemi.sonar.oclint
 import org.sonar.api.config.Configuration
 
 internal fun readReportPath(configuration: Configuration): String {
-    val keys = listOf(CONFIG_REPORT_PATH_KEY)
+    val keys = listOf(CONFIG_REPORT_PATH_KEY, DEPRECATED_CONFIG_REPORT_PATH_KEY)
     val reportPath = keys.filter { configuration.hasKey(it) }
         .mapNotNull(readKey(configuration))
         .firstOrNull()
