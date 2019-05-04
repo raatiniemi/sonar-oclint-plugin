@@ -23,27 +23,24 @@ import org.w3c.dom.Element
 import org.xml.sax.SAXException
 import java.io.File
 import java.io.IOException
-import java.util.*
 import javax.xml.parsers.DocumentBuilder
 
 internal class OCLintXmlReportParser(private val documentBuilder: DocumentBuilder) : ViolationReportParser {
-    override fun parse(reportFile: File): Optional<List<Violation>> {
+    override fun parse(reportFile: File): List<Violation> {
         if (!reportFile.exists()) {
             LOGGER.warn("No XML report exist at path: {}", reportFile)
-            return Optional.empty()
+            return emptyList()
         }
 
         return try {
             val document = documentBuilder.parse(reportFile)
-            val report = parse(document)
-
-            Optional.of(report)
+            parse(document)
         } catch (e: SAXException) {
             LOGGER.error("Unable to process XML file named: {}", reportFile, e)
-            Optional.empty()
+            emptyList()
         } catch (e: IOException) {
             LOGGER.error("Unable to process XML file named: {}", reportFile, e)
-            Optional.empty()
+            emptyList()
         }
     }
 

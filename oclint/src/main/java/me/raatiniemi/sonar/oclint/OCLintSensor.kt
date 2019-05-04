@@ -82,9 +82,8 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
 
     private fun parseReport(reportFile: File): List<Violation> {
         val parser = reportParserFactory.from(reportFile)
-        val violations = parser.parse(reportFile)
 
-        return violations.orElse(emptyList())
+        return parser.parse(reportFile)
     }
 
     companion object {

@@ -52,8 +52,7 @@ class JsonReportParserTest {
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get())
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -70,8 +69,7 @@ class JsonReportParserTest {
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get())
+        assertEquals(expected, actual)
         assertTrue(logTester.logs(LoggerLevel.WARN).contains("Found empty start line in report for path: sample-project/API/ProductDetailAPIClient.m"))
     }
 
@@ -82,7 +80,6 @@ class JsonReportParserTest {
 
         val actual = parser.parse(documentPath.toFile())
 
-        assertTrue("No violations are available", actual.isPresent)
-        assertEquals(expected, actual.get().sorted())
+        assertEquals(expected, actual.sorted())
     }
 }
