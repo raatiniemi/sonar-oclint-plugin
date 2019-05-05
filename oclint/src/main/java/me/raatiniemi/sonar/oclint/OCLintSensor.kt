@@ -69,17 +69,16 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
     }
 
     override fun execute(context: SensorContext) {
-        val violations = collectAndParseAvailableReports(context.fileSystem().baseDir())
+        val projectDirectory = context.fileSystem().baseDir()
+        val violations = findReport(projectDirectory, reportPath)
+            .map { parseReport(it) }
+            .orElse(emptyList())
 
         val persistence = ViolationPersistence.create(context)
         persistence.saveMeasures(violations)
     }
 
-    private fun collectAndParseAvailableReports(projectDirectory: File) = findReport(projectDirectory)
-        .map { parseReport(it) }
-        .orElse(emptyList())
-
-    private fun findReport(projectDirectory: File): Optional<File> {
+    private fun findReport(projectDirectory: File, reportPath: String): Optional<File> {
         return ReportFinder.create(projectDirectory)
             .findReportMatching(reportPath)
     }
