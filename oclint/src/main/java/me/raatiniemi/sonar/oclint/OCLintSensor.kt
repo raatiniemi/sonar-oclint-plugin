@@ -51,6 +51,18 @@ import java.util.*
 class OCLintSensor(private val configuration: Configuration) : Sensor {
     private val reportParserFactory = ReportParserFactory.create()
 
+    private val reportPath: String by lazy {
+        val (key, reportPath) = readReportPath(configuration)
+        when (key) {
+            CONFIG_REPORT_PATH_KEY -> Unit
+            DEPRECATED_CONFIG_REPORT_PATH_KEY -> {
+                LOGGER.warn("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
+            }
+            else -> LOGGER.debug("Found no report path, using default path")
+        }
+        reportPath
+    }
+
     override fun describe(descriptor: SensorDescriptor) {
         descriptor.name(NAME)
         descriptor.onlyOnLanguage("objc")
@@ -68,15 +80,6 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
         .orElse(emptyList())
 
     private fun findReport(projectDirectory: File): Optional<File> {
-        val (key, reportPath) = readReportPath(configuration)
-        when (key) {
-            CONFIG_REPORT_PATH_KEY -> Unit
-            DEPRECATED_CONFIG_REPORT_PATH_KEY -> {
-                LOGGER.warn("Using deprecated report path key, use $CONFIG_REPORT_PATH_KEY instead")
-            }
-            else -> LOGGER.debug("Found no report path, using default path")
-        }
-
         return ReportFinder.create(projectDirectory)
             .findReportMatching(reportPath)
     }
