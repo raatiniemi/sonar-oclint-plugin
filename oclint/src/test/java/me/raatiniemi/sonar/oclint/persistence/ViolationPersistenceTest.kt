@@ -16,9 +16,10 @@
  */
 package me.raatiniemi.sonar.oclint.persistence
 
-import me.raatiniemi.sonar.core.internal.FileSystemHelpers
 import me.raatiniemi.sonar.oclint.OCLintRulesDefinition
 import me.raatiniemi.sonar.oclint.Violation
+import me.raatiniemi.sonar.oclint.addToFileSystem
+import me.raatiniemi.sonar.oclint.mainFile
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -27,7 +28,6 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.sonar.api.batch.fs.internal.DefaultInputFile
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder
 import org.sonar.api.batch.rule.internal.DefaultActiveRules
 import org.sonar.api.batch.sensor.internal.SensorContextTester
@@ -47,19 +47,13 @@ class ViolationPersistenceTest {
     var logTester = LogTester()
 
     private lateinit var context: SensorContextTester
-    private lateinit var helpers: FileSystemHelpers
     private lateinit var persistence: ViolationPersistence
-
-    private lateinit var classNameFile: DefaultInputFile
 
     @Before
     fun setUp() {
         context = SensorContextTester.create(temporaryFolder.root)
-        helpers = FileSystemHelpers.create(context)
 
         persistence = ViolationPersistence.create(context)
-
-        classNameFile = helpers.createFile("TargetName/ClassName.m", "objc")
 
         val builder = ActiveRulesBuilder()
         val rules = listOf(
@@ -80,8 +74,6 @@ class ViolationPersistenceTest {
 
     @Test
     fun saveMeasures_withoutMeasures() {
-        helpers.addToFileSystem(classNameFile)
-
         persistence.saveMeasures(emptyList())
 
         assertTrue(context.allIssues().isEmpty())
@@ -115,7 +107,12 @@ class ViolationPersistenceTest {
                 .setRule("deep nested block")
                 .build()
         )
-        helpers.addToFileSystem(classNameFile)
+        addToFileSystem(context) {
+            mainFile(module()) {
+                relativePath = "TargetName/ClassName.m"
+                language = "objc"
+            }
+        }
 
         persistence.saveMeasures(violations)
 
@@ -139,7 +136,12 @@ class ViolationPersistenceTest {
                 .setRule("unused method parameter")
                 .build()
         )
-        helpers.addToFileSystem(classNameFile)
+        addToFileSystem(context) {
+            mainFile(module()) {
+                relativePath = "TargetName/ClassName.m"
+                language = "objc"
+            }
+        }
 
         persistence.saveMeasures(violations)
 
@@ -158,7 +160,12 @@ class ViolationPersistenceTest {
                 .setRule("unknown rule")
                 .build()
         )
-        helpers.addToFileSystem(classNameFile)
+        addToFileSystem(context) {
+            mainFile(module()) {
+                relativePath = "TargetName/ClassName.m"
+                language = "objc"
+            }
+        }
 
         persistence.saveMeasures(violations)
 
@@ -177,7 +184,12 @@ class ViolationPersistenceTest {
                 .setRule("deep nested block")
                 .build()
         )
-        helpers.addToFileSystem(helpers.createFile("TargetName/ClassName.swift", "swift"))
+        addToFileSystem(context) {
+            mainFile(module()) {
+                relativePath = "TargetName/ClassName.swift"
+                language = "swift"
+            }
+        }
 
         persistence.saveMeasures(violations)
 

@@ -16,7 +16,6 @@
  */
 package me.raatiniemi.sonar.oclint
 
-import me.raatiniemi.sonar.core.internal.FileSystemHelpers
 import me.raatiniemi.sonar.oclint.report.SampleReport
 import org.junit.Assert.*
 import org.junit.Before
@@ -26,8 +25,6 @@ import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.sonar.api.batch.fs.InputComponent
-import org.sonar.api.batch.fs.InputFile
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder
 import org.sonar.api.batch.rule.internal.DefaultActiveRules
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor
@@ -46,6 +43,16 @@ import java.nio.file.Paths
 class OCLintSensorTest {
     private val resourcePath = Paths.get("src", "test", "resources", "oclint", "report")
     private val settings = MapSettings()
+
+    private val relativePaths = listOf(
+        "sample-project/API/ProductDetailAPIClient.m",
+        "sample-project/API/FundFinderAPIClient.m",
+        "sample-project/API/MobileAPIClient.m",
+        "sample-project/API/ProductListingAPIClient.m",
+        "sample-project/InsightsAPIClient.m",
+        "sample-project/ChannelContentAPIClient.m",
+        "sample-project/ViewAllHoldingsAPIClient.m"
+    )
 
     @Rule
     @JvmField
@@ -99,29 +106,15 @@ class OCLintSensorTest {
         )
         context.setActiveRules(DefaultActiveRules(rules))
 
-        val helpers = FileSystemHelpers.create(context)
-        helpers.addToFileSystem(createFile("sample-project/API/ProductDetailAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/API/FundFinderAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/API/MobileAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/API/ProductListingAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/InsightsAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/ChannelContentAPIClient.m"))
-        helpers.addToFileSystem(createFile("sample-project/ViewAllHoldingsAPIClient.m"))
+        relativePaths
+            .map {
+                mainFile(context.module()) {
+                    relativePath = it
+                    language = "objc"
+                }
+            }
+            .forEach(addToFileSystem(context))
     }
-
-    private fun buildInputFile(relativePath: String): TestInputFileBuilder {
-        val content = (1..100).joinToString("\n") {
-            it.toString()
-        }
-
-        return TestInputFileBuilder(context.module().key(), relativePath)
-            .setLanguage("objc")
-            .initMetadata(content)
-    }
-
-    private fun createFile(relativePath: String) = buildInputFile(relativePath)
-        .setType(InputFile.Type.MAIN)
-        .build()
 
     private fun createReportFile(sourcePath: String, destinationPath: String) {
         try {
