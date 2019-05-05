@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,9 +14,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.raatiniemi.sonar.oclint
+package me.raatiniemi.sonar.oclint.persistence
 
 import me.raatiniemi.sonar.core.internal.FileSystemHelpers
+import me.raatiniemi.sonar.oclint.OCLintRulesDefinition
+import me.raatiniemi.sonar.oclint.Violation
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -35,7 +37,7 @@ import org.sonar.api.utils.log.LoggerLevel
 import java.util.*
 
 @RunWith(JUnit4::class)
-class OCLintSensorPersistenceTest {
+class ViolationPersistenceTest {
     @Rule
     @JvmField
     var temporaryFolder = TemporaryFolder()
@@ -46,7 +48,7 @@ class OCLintSensorPersistenceTest {
 
     private lateinit var context: SensorContextTester
     private lateinit var helpers: FileSystemHelpers
-    private lateinit var persistence: OCLintSensorPersistence
+    private lateinit var persistence: ViolationPersistence
 
     private lateinit var classNameFile: DefaultInputFile
 
@@ -55,7 +57,7 @@ class OCLintSensorPersistenceTest {
         context = SensorContextTester.create(temporaryFolder.root)
         helpers = FileSystemHelpers.create(context)
 
-        persistence = OCLintSensorPersistence.create(context)
+        persistence = ViolationPersistence.create(context)
 
         classNameFile = helpers.createFile("TargetName/ClassName.m", "objc")
 
