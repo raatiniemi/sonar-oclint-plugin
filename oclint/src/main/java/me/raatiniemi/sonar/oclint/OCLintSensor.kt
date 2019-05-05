@@ -17,8 +17,8 @@
  */
 package me.raatiniemi.sonar.oclint
 
-import me.raatiniemi.sonar.core.ReportFinder
 import me.raatiniemi.sonar.oclint.persistence.ViolationPersistence
+import me.raatiniemi.sonar.oclint.report.ReportFinder
 import me.raatiniemi.sonar.oclint.report.ReportParserFactory
 import org.sonar.api.Properties
 import org.sonar.api.Property
@@ -28,7 +28,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor
 import org.sonar.api.config.Configuration
 import org.sonar.api.utils.log.Loggers
 import java.io.File
-import java.util.*
 
 @Properties(
     Property(
@@ -51,23 +50,7 @@ import java.util.*
 class OCLintSensor(private val configuration: Configuration) : Sensor {
     private val reportParserFactory = ReportParserFactory.create()
 
-    override fun describe(descriptor: SensorDescriptor) {
-        descriptor.name(NAME)
-        descriptor.onlyOnLanguage("objc")
-    }
-
-    override fun execute(context: SensorContext) {
-        val violations = collectAndParseAvailableReports(context.fileSystem().baseDir())
-
-        val persistence = ViolationPersistence.create(context)
-        persistence.saveMeasures(violations)
-    }
-
-    private fun collectAndParseAvailableReports(projectDirectory: File) = findReport(projectDirectory)
-        .map { parseReport(it) }
-        .orElse(emptyList())
-
-    private fun findReport(projectDirectory: File): Optional<File> {
+    private val reportPath: String by lazy {
         val (key, reportPath) = readReportPath(configuration)
         when (key) {
             CONFIG_REPORT_PATH_KEY -> Unit
@@ -76,7 +59,24 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
             }
             else -> LOGGER.debug("Found no report path, using default path")
         }
+        reportPath
+    }
 
+    override fun describe(descriptor: SensorDescriptor) {
+        descriptor.name(NAME)
+        descriptor.onlyOnLanguage("objc")
+    }
+
+    override fun execute(context: SensorContext) {
+        val projectDirectory = context.fileSystem().baseDir()
+        val violations = findReport(projectDirectory, reportPath)
+            ?.let { parseReport(it) } ?: emptyList()
+
+        val persistence = ViolationPersistence.create(context)
+        persistence.saveMeasures(violations)
+    }
+
+    private fun findReport(projectDirectory: File, reportPath: String): File? {
         return ReportFinder.create(projectDirectory)
             .findReportMatching(reportPath)
     }
