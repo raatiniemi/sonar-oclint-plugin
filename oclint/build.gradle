@@ -32,17 +32,19 @@ targetCompatibility = JavaVersion.VERSION_1_8
 repositories {
     mavenCentral()
     maven {
-        url  "https://dl.bintray.com/raatiniemi/maven"
+        url "https://dl.bintray.com/raatiniemi/maven"
     }
 }
 
 dependencies {
-    compileOnly 'me.raatiniemi.sonar:core:0.0.3'
+    compileOnly('me.raatiniemi.sonar:core:0.0.3') {
+        exclude(module: 'ant')
+    }
     compileOnly 'org.sonarsource.sonarqube:sonar-plugin-api:7.1'
     compileOnly 'org.slf4j:slf4j-api:1.7.21'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    compile ('org.sonarsource.sslr-squid-bridge:sslr-squid-bridge:2.6.1') {
+    compile('org.sonarsource.sslr-squid-bridge:sslr-squid-bridge:2.6.1') {
         exclude(module: 'sslr-core')
         exclude(module: 'sslr-xpath')
         exclude(module: 'sonar-plugin-api')
@@ -50,12 +52,15 @@ dependencies {
         exclude(module: 'slf4j-api')
         exclude(module: 'jcl-over-slf4j')
     }
+    compile 'ant:ant:1.6'
     compile 'commons-lang:commons-lang:2.6'
     compile 'commons-io:commons-io:2.5'
     compile 'com.google.guava:guava:17.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
 
-    testImplementation 'me.raatiniemi.sonar:core:0.0.3'
+    testImplementation('me.raatiniemi.sonar:core:0.0.3') {
+        exclude(module: 'ant')
+    }
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.sonarsource.sonarqube:sonar-plugin-api:7.1'
     testImplementation 'org.slf4j:slf4j-api:1.7.21'
