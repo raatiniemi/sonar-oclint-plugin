@@ -17,8 +17,8 @@
  */
 package me.raatiniemi.sonar.oclint
 
-import me.raatiniemi.sonar.core.ReportFinder
 import me.raatiniemi.sonar.oclint.persistence.ViolationPersistence
+import me.raatiniemi.sonar.oclint.report.ReportFinder
 import me.raatiniemi.sonar.oclint.report.ReportParserFactory
 import org.sonar.api.Properties
 import org.sonar.api.Property
@@ -28,7 +28,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor
 import org.sonar.api.config.Configuration
 import org.sonar.api.utils.log.Loggers
 import java.io.File
-import java.util.*
 
 @Properties(
     Property(
@@ -71,14 +70,13 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
     override fun execute(context: SensorContext) {
         val projectDirectory = context.fileSystem().baseDir()
         val violations = findReport(projectDirectory, reportPath)
-            .map { parseReport(it) }
-            .orElse(emptyList())
+            ?.let { parseReport(it) } ?: emptyList()
 
         val persistence = ViolationPersistence.create(context)
         persistence.saveMeasures(violations)
     }
 
-    private fun findReport(projectDirectory: File, reportPath: String): Optional<File> {
+    private fun findReport(projectDirectory: File, reportPath: String): File? {
         return ReportFinder.create(projectDirectory)
             .findReportMatching(reportPath)
     }
