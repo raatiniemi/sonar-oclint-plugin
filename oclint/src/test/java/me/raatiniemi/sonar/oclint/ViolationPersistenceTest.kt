@@ -35,7 +35,7 @@ import org.sonar.api.utils.log.LoggerLevel
 import java.util.*
 
 @RunWith(JUnit4::class)
-class OCLintSensorPersistenceTest {
+class ViolationPersistenceTest {
     @Rule
     @JvmField
     var temporaryFolder = TemporaryFolder()
@@ -46,7 +46,7 @@ class OCLintSensorPersistenceTest {
 
     private lateinit var context: SensorContextTester
     private lateinit var helpers: FileSystemHelpers
-    private lateinit var persistence: OCLintSensorPersistence
+    private lateinit var persistence: ViolationPersistence
 
     private lateinit var classNameFile: DefaultInputFile
 
@@ -55,7 +55,7 @@ class OCLintSensorPersistenceTest {
         context = SensorContextTester.create(temporaryFolder.root)
         helpers = FileSystemHelpers.create(context)
 
-        persistence = OCLintSensorPersistence.create(context)
+        persistence = ViolationPersistence.create(context)
 
         classNameFile = helpers.createFile("TargetName/ClassName.m", "objc")
 

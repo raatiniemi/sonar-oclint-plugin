@@ -25,7 +25,7 @@ import org.sonar.api.rule.RuleKey
 import org.sonar.api.utils.log.Loggers
 import java.util.*
 
-internal class OCLintSensorPersistence private constructor(
+internal class ViolationPersistence private constructor(
     private val context: SensorContext,
     private val fileSystem: FileSystem
 ) {
@@ -85,11 +85,11 @@ internal class OCLintSensorPersistence private constructor(
     }
 
     companion object {
-        private val LOGGER = Loggers.get(OCLintSensorPersistence::class.java)
+        private val LOGGER = Loggers.get(ViolationPersistence::class.java)
 
         @JvmStatic
-        fun create(context: SensorContext): OCLintSensorPersistence {
-            return OCLintSensorPersistence(context, context.fileSystem())
+        fun create(context: SensorContext): ViolationPersistence {
+            return ViolationPersistence(context, context.fileSystem())
         }
     }
 }

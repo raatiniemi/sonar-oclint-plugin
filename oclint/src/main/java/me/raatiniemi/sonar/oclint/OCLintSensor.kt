@@ -58,7 +58,7 @@ class OCLintSensor(private val configuration: Configuration) : Sensor {
     override fun execute(context: SensorContext) {
         val violations = collectAndParseAvailableReports(context.fileSystem().baseDir())
 
-        val persistence = OCLintSensorPersistence.create(context)
+        val persistence = ViolationPersistence.create(context)
         persistence.saveMeasures(violations)
     }
 
