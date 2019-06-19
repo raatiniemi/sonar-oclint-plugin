@@ -30,6 +30,11 @@ sonarqube {
         properties['sonar.sourceEncoding'] = 'UTF-8'
         properties['sonar.scm.provider'] = 'git'
 
+        def reportPaths = [
+                "$rootDir/oclint/build/reports/jacoco/test/jacoco.xml",
+                "$rootDir/update-rules/build/reports/jacoco/test/jacoco.xml"
+        ]
+        properties['sonar.coverage.jacoco.xmlReportPaths'] = reportPaths.join(",")
         properties['sonar.kotlin.detekt.reportPaths'] = "${project.rootDir}/build/reports/detekt.xml"
     }
 }
@@ -47,7 +52,6 @@ project(':oclint') {
             properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
         }
     }
 }
@@ -65,7 +69,6 @@ project(':update-rules') {
             properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
         }
     }
 }
