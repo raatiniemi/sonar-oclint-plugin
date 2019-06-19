@@ -48,9 +48,8 @@ sonarqube {
 project(':oclint') {
     sonarqube {
         properties {
-
-            properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
-            properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
+            properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
+            properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
         }
@@ -60,8 +59,8 @@ project(':oclint') {
 project(':update-rules') {
     sonarqube {
         properties {
-            properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
-            properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
+            properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
+            properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
             properties['sonar.junit.reportPaths'] = 'build/test-results/test'
         }
