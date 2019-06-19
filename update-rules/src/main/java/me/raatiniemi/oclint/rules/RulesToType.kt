@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package me.raatiniemi.oclint.rules
+
 internal val rulesToTypes = mapOf(
         // Basic
         Rules.BITWISE_OPERATOR_IN_CONDITIONAL to Types.CODE_SMELL,

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Tobias Raatiniemi
+ * Copyright (c) 2018 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,10 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-internal enum class RuleSeverity {
-    INFO,
-    MINOR,
-    MAJOR,
-    CRITICAL,
-    BLOCKER;
-}
+package me.raatiniemi.oclint.rules
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+
+@JacksonXmlRootElement(localName = "profile")
+data class Profile(
+        val name: String = "OCLint",
+        val language: String = "objc",
+        @JacksonXmlElementWrapper(localName = "rules")
+        val rule: List<ProfileRule>
+)

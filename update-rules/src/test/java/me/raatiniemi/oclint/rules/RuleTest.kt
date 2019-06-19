@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package me.raatiniemi.oclint.rules
+
 import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
 import org.junit.Test

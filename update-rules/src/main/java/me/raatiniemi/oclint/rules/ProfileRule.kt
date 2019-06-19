@@ -15,13 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+package me.raatiniemi.oclint.rules
+
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
 
-@JacksonXmlRootElement(localName = "profile")
-data class Profile(
-        val name: String = "OCLint",
-        val language: String = "objc",
-        @JacksonXmlElementWrapper(localName = "rules")
-        val rule: List<ProfileRule>
+@JacksonXmlRootElement(localName = "rule")
+data class ProfileRule(
+        val repositoryKey: String = "OCLint",
+        val key: String
 )

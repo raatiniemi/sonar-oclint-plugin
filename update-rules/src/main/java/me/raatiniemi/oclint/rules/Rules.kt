@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package me.raatiniemi.oclint.rules
+
 enum class Rules(val ruleName: String) {
     AVOID_BRANCHING_STATEMENT_AS_LAST_IN_LOOP("avoid branching statement as last in loop"),
     AVOID_DEFAULT_ARGUMENTS_ON_VIRTUAL_METHODS("avoid default arguments on virtual methods"),

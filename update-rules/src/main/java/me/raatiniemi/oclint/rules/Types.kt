@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package me.raatiniemi.oclint.rules
+
 enum class Types {
     CODE_SMELL,
     BUG,

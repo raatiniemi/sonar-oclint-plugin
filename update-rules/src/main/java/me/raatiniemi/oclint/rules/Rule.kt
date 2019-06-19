@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package me.raatiniemi.oclint.rules
+
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
