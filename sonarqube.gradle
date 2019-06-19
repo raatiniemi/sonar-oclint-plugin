@@ -30,6 +30,12 @@ sonarqube {
         properties['sonar.sourceEncoding'] = 'UTF-8'
         properties['sonar.scm.provider'] = 'git'
 
+        properties['sonar.sources'] = 'src/main'
+        properties['sonar.tests'] = 'src/test'
+
+        properties['sonar.java.source'] = JavaVersion.VERSION_1_8
+        properties['sonar.java.target'] = JavaVersion.VERSION_1_8
+
         def reportPaths = [
                 "$rootDir/oclint/build/reports/jacoco/test/jacoco.xml",
                 "$rootDir/update-rules/build/reports/jacoco/test/jacoco.xml"
@@ -42,11 +48,6 @@ sonarqube {
 project(':oclint') {
     sonarqube {
         properties {
-            properties['sonar.java.source'] = JavaVersion.VERSION_1_8
-            properties['sonar.java.target'] = JavaVersion.VERSION_1_8
-
-            properties['sonar.sources'] = 'src/main'
-            properties['sonar.tests'] = 'src/test'
 
             properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
             properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
@@ -59,12 +60,6 @@ project(':oclint') {
 project(':update-rules') {
     sonarqube {
         properties {
-            properties['sonar.java.source'] = JavaVersion.VERSION_1_8
-            properties['sonar.java.target'] = JavaVersion.VERSION_1_8
-
-            properties['sonar.sources'] = 'src/main'
-            properties['sonar.tests'] = 'src/test'
-
             properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
             properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
 
