@@ -51,7 +51,7 @@ project(':oclint') {
             properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
             properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
-            properties['sonar.junit.reportPaths'] = 'build/test-results/test'
+            properties['sonar.junit.reportPaths'] = "${project.buildDir}/test-results/test"
         }
     }
 }
@@ -62,7 +62,7 @@ project(':update-rules') {
             properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
             properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
-            properties['sonar.junit.reportPaths'] = 'build/test-results/test'
+            properties['sonar.junit.reportPaths'] = "${project.buildDir}/test-results/test"
         }
     }
 }
