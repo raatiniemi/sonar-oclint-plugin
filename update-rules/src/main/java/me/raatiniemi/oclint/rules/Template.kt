@@ -15,10 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+package me.raatiniemi.oclint.rules
 
-@JacksonXmlRootElement(localName = "rule")
-data class ProfileRule(
-        val repositoryKey: String = "OCLint",
-        val key: String
-)
+internal fun headerTemplate(): String {
+    return """
+        Available issues:
+
+        OCLint
+        ======
+
+    """.trimIndent()
+}
+
+internal fun ruleTemplate(it: Rule): String {
+    return "${it.name.toLowerCase()}\n" +
+            "----------\n\n" +
+            "Summary: Name: ${it.name.toLowerCase()}\n" +
+            "${it.description}\n\n" +
+            "Severity: ${it.severity.ordinal}\n" +
+            "Type: ${it.type}\n" +
+            "Category: OCLint\n"
+}

@@ -30,6 +30,17 @@ sonarqube {
         properties['sonar.sourceEncoding'] = 'UTF-8'
         properties['sonar.scm.provider'] = 'git'
 
+        properties['sonar.sources'] = 'src/main'
+        properties['sonar.tests'] = 'src/test'
+
+        properties['sonar.java.source'] = JavaVersion.VERSION_1_8
+        properties['sonar.java.target'] = JavaVersion.VERSION_1_8
+
+        def reportPaths = [
+                "$rootDir/oclint/build/reports/jacoco/test/jacoco.xml",
+                "$rootDir/update-rules/build/reports/jacoco/test/jacoco.xml"
+        ]
+        properties['sonar.coverage.jacoco.xmlReportPaths'] = reportPaths.join(",")
         properties['sonar.kotlin.detekt.reportPaths'] = "${project.rootDir}/build/reports/detekt.xml"
     }
 }
@@ -37,17 +48,10 @@ sonarqube {
 project(':oclint') {
     sonarqube {
         properties {
-            properties['sonar.java.source'] = JavaVersion.VERSION_1_8
-            properties['sonar.java.target'] = JavaVersion.VERSION_1_8
+            properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
+            properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
-            properties['sonar.sources'] = 'src/main'
-            properties['sonar.tests'] = 'src/test'
-
-            properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
-            properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
-
-            properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
+            properties['sonar.junit.reportPaths'] = "${project.buildDir}/test-results/test"
         }
     }
 }
@@ -55,17 +59,10 @@ project(':oclint') {
 project(':update-rules') {
     sonarqube {
         properties {
-            properties['sonar.java.source'] = JavaVersion.VERSION_1_8
-            properties['sonar.java.target'] = JavaVersion.VERSION_1_8
+            properties['sonar.java.binaries'] = "${project.buildDir}/classes/kotlin/main"
+            properties['sonar.java.test.binaries'] = "${project.buildDir}/classes/kotlin/test"
 
-            properties['sonar.sources'] = 'src/main'
-            properties['sonar.tests'] = 'src/test'
-
-            properties['sonar.java.binaries'] = 'build/classes/kotlin/main'
-            properties['sonar.java.test.binaries'] = 'build/classes/kotlin/test'
-
-            properties['sonar.junit.reportPaths'] = 'build/test-results/test'
-            properties['sonar.coverage.jacoco.xmlReportPaths'] = 'build/reports/jacoco/test/jacoco.xml'
+            properties['sonar.junit.reportPaths'] = "${project.buildDir}/test-results/test"
         }
     }
 }

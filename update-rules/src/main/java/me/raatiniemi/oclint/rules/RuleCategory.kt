@@ -15,22 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-internal fun headerTemplate(): String {
-    return """
-        Available issues:
+package me.raatiniemi.oclint.rules
 
-        OCLint
-        ======
+internal data class RuleCategory(val name: String, val severity: RuleSeverity)
 
-    """.trimIndent()
-}
-
-internal fun ruleTemplate(it: Rule): String {
-    return "${it.name.toLowerCase()}\n" +
-            "----------\n\n" +
-            "Summary: Name: ${it.name.toLowerCase()}\n" +
-            "${it.description}\n\n" +
-            "Severity: ${it.severity.ordinal}\n" +
-            "Type: ${it.type}\n" +
-            "Category: OCLint\n"
+internal fun basenamePath(category: RuleCategory): String {
+    return "${category.name.toLowerCase()}.html"
 }
