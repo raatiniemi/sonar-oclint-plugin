@@ -17,7 +17,6 @@
 
 package me.raatiniemi.sonar.oclint
 
-import org.apache.commons.lang.StringUtils
 import org.slf4j.LoggerFactory
 import java.util.*
 
@@ -41,7 +40,7 @@ internal class RuleDefinitionParser private constructor() {
 
                 builder = RuleDefinition.builder()
                 builder.setKey(Objects.requireNonNull<String>(previousLine))
-                val name = StringUtils.capitalize(previousLine)
+                val name = previousLine?.capitalize() ?: ""
                 builder.setName(Objects.requireNonNull(name))
                 inDescription = false
                 previousLine = line

@@ -41,17 +41,7 @@ dependencies {
     compileOnly 'org.slf4j:slf4j-api:1.7.21'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    compile('org.sonarsource.sslr-squid-bridge:sslr-squid-bridge:2.6.1') {
-        exclude(module: 'sslr-core')
-        exclude(module: 'sslr-xpath')
-        exclude(module: 'sonar-plugin-api')
-        exclude(module: 'picocontainer')
-        exclude(module: 'slf4j-api')
-        exclude(module: 'jcl-over-slf4j')
-    }
     compile 'ant:ant:1.6'
-    compile 'commons-lang:commons-lang:2.6'
-    compile 'commons-io:commons-io:2.5'
     compile 'com.google.guava:guava:17.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
 
