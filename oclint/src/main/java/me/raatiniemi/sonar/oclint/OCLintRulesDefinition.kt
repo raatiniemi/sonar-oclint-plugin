@@ -19,7 +19,6 @@ package me.raatiniemi.sonar.oclint
 import org.slf4j.LoggerFactory
 import org.sonar.api.rules.RuleType
 import org.sonar.api.server.rule.RulesDefinition
-import org.sonar.squidbridge.rules.SqaleXmlLoader
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -35,8 +34,6 @@ class OCLintRulesDefinition : RulesDefinition {
         } catch (e: IOException) {
             LOGGER.error("Failed to load OCLint rules", e)
         }
-
-        SqaleXmlLoader.load(repository, "/me/raatiniemi/sonar/oclint/sqale/oclint-model.xml")
 
         repository.done()
     }
