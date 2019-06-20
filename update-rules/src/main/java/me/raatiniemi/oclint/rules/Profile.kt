@@ -22,8 +22,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
 
 @JacksonXmlRootElement(localName = "profile")
 data class Profile(
-        val name: String = "OCLint",
-        val language: String = "objc",
-        @JacksonXmlElementWrapper(localName = "rules")
-        val rule: List<ProfileRule>
+    val name: String = "OCLint",
+    val language: String = "objc",
+    @JacksonXmlElementWrapper(localName = "rules")
+    val rule: List<ProfileRule>
 )

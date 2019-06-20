@@ -21,6 +21,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
 
 @JacksonXmlRootElement(localName = "rule")
 data class ProfileRule(
-        val repositoryKey: String = "OCLint",
-        val key: String
+    val repositoryKey: String = "OCLint",
+    val key: String
 )

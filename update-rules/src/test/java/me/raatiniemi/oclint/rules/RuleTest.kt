@@ -29,8 +29,8 @@ class RuleTest {
     @Test
     fun from_simpleRuleDescription() {
         val expected = Rule(
-                "Bitwise operator in conditional",
-                """
+            "Bitwise operator in conditional",
+            """
                 <p>Checks for bitwise operations in conditionals. Although being written on purpose in some rare cases, bitwise operations are considered to be too “smart”. Smart code is not easy to understand.</p>
                 <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp">oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp</a></p>
                 <p><strong>Example:</strong></p>
@@ -44,8 +44,8 @@ class RuleTest {
                     }
                 }</pre>
                 """.trimIndent(),
-                ruleCategory.name,
-                ruleCategory.severity
+            ruleCategory.name,
+            ruleCategory.severity
         )
         val ruleDescription = """
             <div class="section" id="bitwiseoperatorinconditional">
@@ -77,8 +77,8 @@ class RuleTest {
     @Test
     fun from_advancedRuleDescription() {
         val expected = Rule(
-                "High npath complexity",
-                """
+            "High npath complexity",
+            """
                 <p>NPath complexity is determined by the number of execution paths through that method. Compared to cyclomatic complexity, NPath complexity has two outstanding characteristics: first, it distinguishes between different kinds of control flow structures; second, it takes the various type of acyclic paths in a flow graph into consideration.</p>
                 <p>Based on studies done by the original author in AT&amp;T Bell Lab, an NPath threshold value of 200 has been established for a method.</p>
                 <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/NPathComplexityRule.cpp">oclint-rules/rules/size/NPathComplexityRule.cpp</a></p>
@@ -94,8 +94,8 @@ class RuleTest {
                 <p><strong>References:</strong></p>
                 <p>Brian A. Nejmeh (1988). <a class="reference external" href="http://dl.acm.org/citation.cfm?id=42379">“NPATH: a measure of execution path complexity and its applications”</a>. <em>Communications of the ACM 31 (2) p. 188-200</em></p>
                 """.trimIndent(),
-                ruleCategory.name,
-                ruleCategory.severity
+            ruleCategory.name,
+            ruleCategory.severity
         )
         val ruleDescription = """
             <div class="section" id="highnpathcomplexity">

@@ -33,16 +33,16 @@ private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/son
 
 private const val BASE_URL = "http://docs.oclint.org/en/stable/rules"
 private val availableRuleCategoriesWithSeverity = mapOf(
-        "Basic" to RuleSeverity.CRITICAL,
-        "Cocoa" to RuleSeverity.MINOR,
-        "Convention" to RuleSeverity.MAJOR,
-        "Design" to RuleSeverity.MAJOR,
-        "Empty" to RuleSeverity.CRITICAL,
-        "Migration" to RuleSeverity.MINOR,
-        "Naming" to RuleSeverity.MAJOR,
-        "Redundant" to RuleSeverity.MINOR,
-        "Size" to RuleSeverity.CRITICAL,
-        "Unused" to RuleSeverity.INFO
+    "Basic" to RuleSeverity.CRITICAL,
+    "Cocoa" to RuleSeverity.MINOR,
+    "Convention" to RuleSeverity.MAJOR,
+    "Design" to RuleSeverity.MAJOR,
+    "Empty" to RuleSeverity.CRITICAL,
+    "Migration" to RuleSeverity.MINOR,
+    "Naming" to RuleSeverity.MAJOR,
+    "Redundant" to RuleSeverity.MINOR,
+    "Size" to RuleSeverity.CRITICAL,
+    "Unused" to RuleSeverity.INFO
 )
 
 fun main(args: Array<String>) {
@@ -52,9 +52,9 @@ fun main(args: Array<String>) {
     listRuleCategoriesWithMissingSeverity(nameForAvailableRuleCategories())
 
     val rules = availableRuleCategoriesWithSeverity
-            .map { RuleCategory(name = it.key, severity = it.value) }
-            .flatMap { fetchRulesFor(it) }
-            .sortedBy { it.name }
+        .map { RuleCategory(name = it.key, severity = it.value) }
+        .flatMap { fetchRulesFor(it) }
+        .sortedBy { it.name }
 
     println("Found ${rules.count()} rules.")
 
@@ -67,18 +67,18 @@ fun main(args: Array<String>) {
 
 private fun writeRulesToFile(rules: List<Rule>) {
     File(PATH_TO_RULES).printWriter()
-            .use { out ->
-                out.println(headerTemplate())
+        .use { out ->
+            out.println(headerTemplate())
 
-                rules.forEach {
-                    out.println(ruleTemplate(it))
-                }
+            rules.forEach {
+                out.println(ruleTemplate(it))
             }
+        }
 }
 
 private fun buildProfile(rules: List<Rule>): Profile {
     val profileRules = rules.map { ProfileRule(key = it.key) }
-            .toList()
+        .toList()
 
     return Profile(rule = profileRules)
 }
@@ -91,54 +91,54 @@ private fun writeProfileToFile(profile: Profile) {
     mapper.enable(SerializationFeature.INDENT_OUTPUT)
 
     File(PATH_TO_PROFILE).printWriter()
-            .use { out ->
-                out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
-                out.println(mapper.writeValueAsString(profile))
-            }
+        .use { out ->
+            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
+            out.println(mapper.writeValueAsString(profile))
+        }
 }
 
 private fun readVersion(): String {
     return fetch("index.html")
-            .select("#rule-index > p")
-            .map { it.text() }
-            .mapNotNull {
-                val regex = """OCLint ([\d\.]+) includes""".toRegex()
-                val (version) = regex.find(it)?.destructured ?: return@mapNotNull null
-                return@mapNotNull version
-            }
-            .firstOrNull() ?: ""
+        .select("#rule-index > p")
+        .map { it.text() }
+        .mapNotNull {
+            val regex = """OCLint ([\d\.]+) includes""".toRegex()
+            val (version) = regex.find(it)?.destructured ?: return@mapNotNull null
+            return@mapNotNull version
+        }
+        .firstOrNull() ?: ""
 }
 
 private fun writeVersionToReadMe(version: String) {
     File(PATH_TO_READ_ME).run {
         readLines()
-                .map {
-                    val regex = """oclint-([\d\.]+)-blue""".toRegex()
-                    val result = regex.find(it) ?: return@map it
-                    val (previousVersion) = result.destructured
+            .map {
+                val regex = """oclint-([\d\.]+)-blue""".toRegex()
+                val result = regex.find(it) ?: return@map it
+                val (previousVersion) = result.destructured
 
-                    it.replace(previousVersion, version)
-                }
-                .joinToString("\n")
-                .let { writeText("$it\n") }
+                it.replace(previousVersion, version)
+            }
+            .joinToString("\n")
+            .let { writeText("$it\n") }
     }
 }
 
 private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<String>) {
     (availableRuleCategories - availableRuleCategoriesWithSeverity.keys)
-            .forEach { println("Rule \"$it\" is missing severity") }
+        .forEach { println("Rule \"$it\" is missing severity") }
 }
 
 private fun nameForAvailableRuleCategories(): List<String> {
     return fetch("index.html")
-            .select(".toctree-l1 > a")
-            .map { it.text() }
+        .select(".toctree-l1 > a")
+        .map { it.text() }
 }
 
 private fun fetchRulesFor(category: RuleCategory): List<Rule> {
     return fetch(basenamePath(category))
-            .select(".section > .section")
-            .map { Rule.from(category, html = it) }
+        .select(".section > .section")
+        .map { Rule.from(category, html = it) }
 }
 
 private fun fetch(path: String): Document {

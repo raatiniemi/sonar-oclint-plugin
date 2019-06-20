@@ -21,10 +21,10 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
 internal data class Rule(
-        val name: String,
-        val description: String,
-        val category: String,
-        val severity: RuleSeverity
+    val name: String,
+    val description: String,
+    val category: String,
+    val severity: RuleSeverity
 ) {
     val key = name.toLowerCase()
     val type = {
@@ -33,9 +33,9 @@ internal data class Rule(
     }()
 
     private fun sanitizeKey() = key.replace("-", "_")
-            .replace("/", "_")
-            .replace(" ", "_")
-            .toUpperCase()
+        .replace("/", "_")
+        .replace(" ", "_")
+        .toUpperCase()
 
 
     companion object {
@@ -43,10 +43,10 @@ internal data class Rule(
             val elements = skipVersion(elementsFrom(html))
 
             return Rule(
-                    name = readName(elements),
-                    description = readDescription(elements),
-                    category = category.name,
-                    severity = category.severity
+                name = readName(elements),
+                description = readDescription(elements),
+                category = category.name,
+                severity = category.severity
             )
         }
 
@@ -56,15 +56,15 @@ internal data class Rule(
 
         private fun readName(elements: List<Element>): String {
             return elements.first()
-                    .select("p > strong")
-                    .text()
-                    .removePrefix("Name: ")
-                    .capitalize()
+                .select("p > strong")
+                .text()
+                .removePrefix("Name: ")
+                .capitalize()
         }
 
         private fun readDescription(elements: List<Element>): String {
             return elements.drop(1)
-                    .joinToString(separator = "\n") { buildElement(it) }
+                .joinToString(separator = "\n") { buildElement(it) }
         }
 
         private fun buildElement(element: Element): String {
