@@ -17,12 +17,10 @@
 
 package me.raatiniemi.oclint.rules
 
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
+import me.raatiniemi.oclint.rules.writer.writeAsXml
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
@@ -84,16 +82,9 @@ private fun buildProfile(rules: List<Rule>): Profile {
 }
 
 private fun writeProfileToFile(profile: Profile) {
-    val module = JacksonXmlModule()
-    module.setDefaultUseWrapper(false)
-
-    val mapper = XmlMapper(module)
-    mapper.enable(SerializationFeature.INDENT_OUTPUT)
-
     File(PATH_TO_PROFILE).printWriter()
         .use { out ->
-            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
-            out.println(mapper.writeValueAsString(profile))
+            out.print(writeAsXml(profile))
         }
 }
 
