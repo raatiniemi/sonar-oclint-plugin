@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,12 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.oclint.rules
+package me.raatiniemi.oclint.rules.profile
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+import me.raatiniemi.oclint.rules.Rule
 
-@JacksonXmlRootElement(localName = "rule")
-data class ProfileRule(
-    val repositoryKey: String = "OCLint",
-    val key: String
-)
+internal data class Profile(val name: String, val ruleKeys: List<String>)
+
+internal fun profile(rules: List<Rule>) = Profile("OCLint", rules.map { it.key })

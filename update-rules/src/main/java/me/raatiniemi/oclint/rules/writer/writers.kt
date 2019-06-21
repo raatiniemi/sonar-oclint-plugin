@@ -18,8 +18,7 @@
 package me.raatiniemi.oclint.rules.writer
 
 import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 
 /**
@@ -29,24 +28,16 @@ internal fun writeToFile(path: String, contents: () -> String) = File(path).prin
     .use { it.print(contents()) }
 
 /**
- * Preconfigured Jackson XML mapper.
+ * Preconfigured Jackson JSON mapper.
  */
-private val xmlMapper by lazy {
-    val module = JacksonXmlModule()
-    module.setDefaultUseWrapper(false)
-
-    val mapper = XmlMapper(module)
-    mapper.enable(SerializationFeature.INDENT_OUTPUT)
-}
+private val jsonMapper = jacksonObjectMapper()
+    .enable(SerializationFeature.INDENT_OUTPUT)
 
 /**
- * Write any object to an xml document.
+ * Write any object to an JSON document.
  */
-internal val writeAsXml: (Any) -> String = {
-    StringBuilder()
-        .apply {
-            appendln("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
-            append(xmlMapper.writeValueAsString(it))
-        }
-        .toString()
+internal val writeAsJson: (Any) -> String = { value ->
+    jsonMapper.writerWithDefaultPrettyPrinter()
+        .writeValueAsString(value)
+        .let { "$it\n" }
 }

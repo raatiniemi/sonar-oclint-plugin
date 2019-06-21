@@ -20,7 +20,8 @@ package me.raatiniemi.oclint.rules
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
-import me.raatiniemi.oclint.rules.writer.writeAsXml
+import me.raatiniemi.oclint.rules.profile.profile
+import me.raatiniemi.oclint.rules.writer.writeAsJson
 import me.raatiniemi.oclint.rules.writer.writeToFile
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -28,7 +29,7 @@ import java.io.File
 
 private const val PATH_TO_READ_ME = "README.md"
 private const val PATH_TO_RULES = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
-private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile-oclint.xml"
+private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile.json"
 
 private const val BASE_URL = "http://docs.oclint.org/en/stable/rules"
 private val availableRuleCategoriesWithSeverity = mapOf(
@@ -60,9 +61,9 @@ fun main(args: Array<String>) {
     println("Writing available rules to rules.txt")
     writeToFile(PATH_TO_RULES, writeRules(rules))
 
-    println("Writing available rules to profile-oclint.xml")
+    println("Writing available rules to: $PATH_TO_PROFILE")
     writeToFile(PATH_TO_PROFILE) {
-        writeAsXml(buildProfile(rules))
+        writeAsJson(profile(rules))
     }
 }
 
@@ -76,13 +77,6 @@ private fun writeRules(rules: List<Rule>): () -> String = {
             }
         }
         .toString()
-}
-
-private fun buildProfile(rules: List<Rule>): Profile {
-    val profileRules = rules.map { ProfileRule(key = it.key) }
-        .toList()
-
-    return Profile(rule = profileRules)
 }
 
 private fun readVersion(): String {
