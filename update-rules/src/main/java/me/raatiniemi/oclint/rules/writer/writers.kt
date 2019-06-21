@@ -20,6 +20,13 @@ package me.raatiniemi.oclint.rules.writer
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import java.io.File
+
+/**
+ * Write content to file at the supplied path.
+ */
+internal fun writeToFile(path: String, contents: () -> String) = File(path).printWriter()
+    .use { it.print(contents()) }
 
 /**
  * Preconfigured Jackson XML mapper.

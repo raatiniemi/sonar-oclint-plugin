@@ -21,6 +21,7 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import me.raatiniemi.oclint.rules.writer.writeAsXml
+import me.raatiniemi.oclint.rules.writer.writeToFile
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
@@ -57,21 +58,24 @@ fun main(args: Array<String>) {
     println("Found ${rules.count()} rules.")
 
     println("Writing available rules to rules.txt")
-    writeRulesToFile(rules)
+    writeToFile(PATH_TO_RULES, writeRules(rules))
 
     println("Writing available rules to profile-oclint.xml")
-    writeProfileToFile(buildProfile(rules))
+    writeToFile(PATH_TO_PROFILE) {
+        writeAsXml(buildProfile(rules))
+    }
 }
 
-private fun writeRulesToFile(rules: List<Rule>) {
-    File(PATH_TO_RULES).printWriter()
-        .use { out ->
-            out.println(headerTemplate())
+private fun writeRules(rules: List<Rule>): () -> String = {
+    StringBuilder()
+        .apply {
+            appendln(headerTemplate())
 
             rules.forEach {
-                out.println(ruleTemplate(it))
+                appendln(ruleTemplate(it))
             }
         }
+        .toString()
 }
 
 private fun buildProfile(rules: List<Rule>): Profile {
@@ -79,13 +83,6 @@ private fun buildProfile(rules: List<Rule>): Profile {
         .toList()
 
     return Profile(rule = profileRules)
-}
-
-private fun writeProfileToFile(profile: Profile) {
-    File(PATH_TO_PROFILE).printWriter()
-        .use { out ->
-            out.print(writeAsXml(profile))
-        }
 }
 
 private fun readVersion(): String {
@@ -101,18 +98,17 @@ private fun readVersion(): String {
 }
 
 private fun writeVersionToReadMe(version: String) {
-    File(PATH_TO_READ_ME).run {
-        readLines()
-            .map {
-                val regex = """oclint-([\d\.]+)-blue""".toRegex()
-                val result = regex.find(it) ?: return@map it
-                val (previousVersion) = result.destructured
+    val lines = File(PATH_TO_READ_ME).readLines()
+        .map {
+            val regex = """oclint-([\d\.]+)-blue""".toRegex()
+            val result = regex.find(it) ?: return@map it
+            val (previousVersion) = result.destructured
 
-                it.replace(previousVersion, version)
-            }
-            .joinToString("\n")
-            .let { writeText("$it\n") }
-    }
+            it.replace(previousVersion, version)
+        }
+        .joinToString("\n")
+
+    writeToFile(PATH_TO_READ_ME) { "$lines\n" }
 }
 
 private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<String>) {
