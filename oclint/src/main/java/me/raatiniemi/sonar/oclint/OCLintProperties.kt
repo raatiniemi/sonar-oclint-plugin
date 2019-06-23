@@ -17,6 +17,9 @@
 
 package me.raatiniemi.sonar.oclint
 
+internal const val LANGUAGE = "objc"
+internal const val PROFILE_NAME = "OCLint"
+
 const val CONFIG_REPORT_PATH_KEY = "sonar.oclint.reportPath"
 const val CONFIG_REPORT_PATH_DEFAULT_VALUE = "sonar-reports/oclint.xml"
 const val CONFIG_REPORT_PATH_NAME = "Path to OCLint violation report"
