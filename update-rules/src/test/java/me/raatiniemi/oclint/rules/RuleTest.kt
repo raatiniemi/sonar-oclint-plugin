@@ -24,29 +24,8 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class RuleTest {
-    private val ruleCategory = RuleCategory("category name", RuleSeverity.MAJOR)
-
     @Test
     fun from_simpleRuleDescription() {
-        val expected = Rule(
-            "Bitwise operator in conditional",
-            """
-                <p>Checks for bitwise operations in conditionals. Although being written on purpose in some rare cases, bitwise operations are considered to be too “smart”. Smart code is not easy to understand.</p>
-                <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp">oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp</a></p>
-                <p><strong>Example:</strong></p>
-                <pre>void example(int a, int b)
-                {
-                    if (a | b)
-                    {
-                    }
-                    if (a & b)
-                    {
-                    }
-                }</pre>
-                """.trimIndent(),
-            ruleCategory.name,
-            ruleCategory.severity
-        )
         val ruleDescription = """
             <div class="section" id="bitwiseoperatorinconditional">
             <h2>BitwiseOperatorInConditional<a class="headerlink" href="#bitwiseoperatorinconditional" title="Permalink to this headline">¶</a></h2>
@@ -69,34 +48,13 @@ class RuleTest {
             </div>
         """.trimIndent()
 
-        val actual = Rule.from(ruleCategory, Jsoup.parse(ruleDescription))
+        val actual = Rule.from(basic, Jsoup.parse(ruleDescription))
 
-        assertEquals(expected, actual)
+        assertEquals(bitwiseOperatorInConditional, actual)
     }
 
     @Test
     fun from_advancedRuleDescription() {
-        val expected = Rule(
-            "High npath complexity",
-            """
-                <p>NPath complexity is determined by the number of execution paths through that method. Compared to cyclomatic complexity, NPath complexity has two outstanding characteristics: first, it distinguishes between different kinds of control flow structures; second, it takes the various type of acyclic paths in a flow graph into consideration.</p>
-                <p>Based on studies done by the original author in AT&amp;T Bell Lab, an NPath threshold value of 200 has been established for a method.</p>
-                <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/size/NPathComplexityRule.cpp">oclint-rules/rules/size/NPathComplexityRule.cpp</a></p>
-                <p><strong>Example:</strong></p>
-                <pre>void example()
-                {
-                    // complicated code that is hard to understand
-                }</pre>
-                <p><strong>Thresholds:</strong></p>
-                <dl><dt> NPATH_COMPLEXITY</dt> <dd> The NPath complexity reporting threshold, default value is 200.</dd></dl>
-                <p><strong>Suppress:</strong></p>
-                <pre>__attribute__((annotate("oclint:suppress[high npath complexity]")))</pre>
-                <p><strong>References:</strong></p>
-                <p>Brian A. Nejmeh (1988). <a class="reference external" href="http://dl.acm.org/citation.cfm?id=42379">“NPATH: a measure of execution path complexity and its applications”</a>. <em>Communications of the ACM 31 (2) p. 188-200</em></p>
-                """.trimIndent(),
-            ruleCategory.name,
-            ruleCategory.severity
-        )
         val ruleDescription = """
             <div class="section" id="highnpathcomplexity">
             <h2>HighNPathComplexity<a class="headerlink" href="#highnpathcomplexity" title="Permalink to this headline">¶</a></h2>
@@ -130,8 +88,8 @@ class RuleTest {
             </div>
         """.trimIndent()
 
-        val actual = Rule.from(ruleCategory, Jsoup.parse(ruleDescription))
+        val actual = Rule.from(size, Jsoup.parse(ruleDescription))
 
-        assertEquals(expected, actual)
+        assertEquals(highNpathComplexity, actual)
     }
 }

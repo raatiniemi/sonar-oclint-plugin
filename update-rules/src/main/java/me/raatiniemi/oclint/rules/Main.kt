@@ -17,19 +17,19 @@
 
 package me.raatiniemi.oclint.rules
 
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
+import me.raatiniemi.oclint.rules.profile.profile
+import me.raatiniemi.oclint.rules.writer.writeAsJson
+import me.raatiniemi.oclint.rules.writer.writeToFile
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
 
 private const val PATH_TO_READ_ME = "README.md"
 private const val PATH_TO_RULES = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/rules.txt"
-private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile-oclint.xml"
+private const val PATH_TO_PROFILE = "oclint/src/main/resources/me/raatiniemi/sonar/oclint/profile.json"
 
 private const val BASE_URL = "http://docs.oclint.org/en/stable/rules"
 private val availableRuleCategoriesWithSeverity = mapOf(
@@ -59,42 +59,24 @@ fun main(args: Array<String>) {
     println("Found ${rules.count()} rules.")
 
     println("Writing available rules to rules.txt")
-    writeRulesToFile(rules)
+    writeToFile(PATH_TO_RULES, writeRules(rules))
 
-    println("Writing available rules to profile-oclint.xml")
-    writeProfileToFile(buildProfile(rules))
+    println("Writing available rules to: $PATH_TO_PROFILE")
+    writeToFile(PATH_TO_PROFILE) {
+        writeAsJson(profile(rules))
+    }
 }
 
-private fun writeRulesToFile(rules: List<Rule>) {
-    File(PATH_TO_RULES).printWriter()
-        .use { out ->
-            out.println(headerTemplate())
+internal fun writeRules(rules: List<Rule>): () -> String = {
+    StringBuilder()
+        .apply {
+            appendln(headerTemplate())
 
             rules.forEach {
-                out.println(ruleTemplate(it))
+                appendln(ruleTemplate(it))
             }
         }
-}
-
-private fun buildProfile(rules: List<Rule>): Profile {
-    val profileRules = rules.map { ProfileRule(key = it.key) }
-        .toList()
-
-    return Profile(rule = profileRules)
-}
-
-private fun writeProfileToFile(profile: Profile) {
-    val module = JacksonXmlModule()
-    module.setDefaultUseWrapper(false)
-
-    val mapper = XmlMapper(module)
-    mapper.enable(SerializationFeature.INDENT_OUTPUT)
-
-    File(PATH_TO_PROFILE).printWriter()
-        .use { out ->
-            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>")
-            out.println(mapper.writeValueAsString(profile))
-        }
+        .toString()
 }
 
 private fun readVersion(): String {
@@ -110,18 +92,17 @@ private fun readVersion(): String {
 }
 
 private fun writeVersionToReadMe(version: String) {
-    File(PATH_TO_READ_ME).run {
-        readLines()
-            .map {
-                val regex = """oclint-([\d\.]+)-blue""".toRegex()
-                val result = regex.find(it) ?: return@map it
-                val (previousVersion) = result.destructured
+    val lines = File(PATH_TO_READ_ME).readLines()
+        .map {
+            val regex = """oclint-([\d\.]+)-blue""".toRegex()
+            val result = regex.find(it) ?: return@map it
+            val (previousVersion) = result.destructured
 
-                it.replace(previousVersion, version)
-            }
-            .joinToString("\n")
-            .let { writeText("$it\n") }
-    }
+            it.replace(previousVersion, version)
+        }
+        .joinToString("\n")
+
+    writeToFile(PATH_TO_READ_ME) { "$lines\n" }
 }
 
 private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<String>) {

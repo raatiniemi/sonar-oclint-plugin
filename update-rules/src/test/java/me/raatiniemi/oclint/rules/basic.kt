@@ -15,16 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.raatiniemi.sonar.oclint
+package me.raatiniemi.oclint.rules
 
-internal const val LANGUAGE = "objc"
-internal const val PROFILE_NAME = "OCLint"
-
-const val CONFIG_REPORT_PATH_KEY = "sonar.oclint.reportPath"
-const val CONFIG_REPORT_PATH_DEFAULT_VALUE = "sonar-reports/oclint.xml"
-const val CONFIG_REPORT_PATH_NAME = "Path to OCLint violation report"
-const val CONFIG_REPORT_PATH_DESCRIPTION = "Relative to projects' root."
-
-const val DEPRECATED_CONFIG_REPORT_PATH_KEY = "sonar.objectivec.oclint.reportPath"
-const val DEPRECATED_CONFIG_REPORT_PATH_DESCRIPTION =
-    "Relative to projects' root, deprecated use `$CONFIG_REPORT_PATH_KEY` instead."
+internal val basic = RuleCategory("Basic", RuleSeverity.CRITICAL)
