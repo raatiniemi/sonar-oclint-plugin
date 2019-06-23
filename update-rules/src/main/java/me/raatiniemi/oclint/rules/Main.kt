@@ -67,7 +67,7 @@ fun main(args: Array<String>) {
     }
 }
 
-private fun writeRules(rules: List<Rule>): () -> String = {
+internal fun writeRules(rules: List<Rule>): () -> String = {
     StringBuilder()
         .apply {
             appendln(headerTemplate())
