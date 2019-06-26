@@ -63,17 +63,6 @@ internal class ViolationPersistence private constructor(
             return Optional.empty()
         }
 
-        val language = inputFile.language()
-        if (null == language) {
-            LOGGER.debug("No language is available for {}", name)
-            return Optional.empty()
-        }
-
-        if (!language.toLowerCase().contains("objc")) {
-            LOGGER.debug("{} belong to language {}", name, language)
-            return Optional.empty()
-        }
-
         return Optional.of(inputFile)
     }
 
