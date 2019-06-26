@@ -1,6 +1,6 @@
 /*
  * Copyright © 2012 OCTO Technology, Backelite (${email})
- * Copyright (c) 2018 Tobias Raatiniemi
+ * Copyright (c) 2019 Tobias Raatiniemi
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
