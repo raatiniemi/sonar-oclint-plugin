@@ -41,21 +41,23 @@ internal class ViolationPersistence private constructor(
             return
         }
 
-        violations.forEach { violation ->
-            val rule = RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, violation.rule)
-            val newIssue = context.newIssue().forRule(rule)
-            val location = newIssue.newLocation()
-                .on(inputFile)
-                .at(inputFile.selectLine(violation.startLine))
-                .message(violation.message)
-
-            newIssue.at(location).save()
-        }
+        violations.forEach(persistIssue(inputFile))
     }
 
     private fun buildInputFile(path: String): InputFile? {
         val predicate = fileSystem.predicates().hasPath(path)
         return fileSystem.inputFile(predicate)
+    }
+
+    private fun persistIssue(inputFile: InputFile): (Violation) -> Unit = { violation ->
+        val rule = RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, violation.rule)
+        val newIssue = context.newIssue().forRule(rule)
+        val location = newIssue.newLocation()
+            .on(inputFile)
+            .at(inputFile.selectLine(violation.startLine))
+            .message(violation.message)
+
+        newIssue.at(location).save()
     }
 
     companion object {
