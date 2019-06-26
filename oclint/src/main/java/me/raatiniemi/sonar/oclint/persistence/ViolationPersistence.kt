@@ -19,13 +19,11 @@ package me.raatiniemi.sonar.oclint.persistence
 
 import me.raatiniemi.sonar.oclint.OCLintRulesDefinition
 import me.raatiniemi.sonar.oclint.Violation
-import org.sonar.api.batch.fs.FilePredicate
 import org.sonar.api.batch.fs.FileSystem
 import org.sonar.api.batch.fs.InputFile
 import org.sonar.api.batch.sensor.SensorContext
 import org.sonar.api.rule.RuleKey
 import org.sonar.api.utils.log.Loggers
-import java.util.*
 
 internal class ViolationPersistence private constructor(
     private val context: SensorContext,
@@ -37,33 +35,27 @@ internal class ViolationPersistence private constructor(
         }
 
     private fun saveViolationsGroupedByFile(path: String, violations: List<Violation>) {
-        val value = buildInputFile(path)
-        value.map {
-            violations.forEach { violation ->
-                val rule = RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, violation.rule)
-                val newIssue = context.newIssue().forRule(rule)
-                val location = newIssue.newLocation()
-                    .on(it)
-                    .at(it.selectLine(violation.startLine))
-                    .message(violation.message)
-
-                newIssue.at(location).save()
-            }
-        }
-    }
-
-    private fun buildInputFile(path: String): Optional<InputFile> {
-        return buildInputFile(fileSystem.predicates().hasPath(path), path)
-    }
-
-    private fun buildInputFile(filePredicate: FilePredicate, name: String): Optional<InputFile> {
-        val inputFile = context.fileSystem().inputFile(filePredicate)
+        val inputFile = buildInputFile(path)
         if (null == inputFile) {
-            LOGGER.warn("No path available for {}", name)
-            return Optional.empty()
+            LOGGER.warn("No path available for {}", path)
+            return
         }
 
-        return Optional.of(inputFile)
+        violations.forEach { violation ->
+            val rule = RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, violation.rule)
+            val newIssue = context.newIssue().forRule(rule)
+            val location = newIssue.newLocation()
+                .on(inputFile)
+                .at(inputFile.selectLine(violation.startLine))
+                .message(violation.message)
+
+            newIssue.at(location).save()
+        }
+    }
+
+    private fun buildInputFile(path: String): InputFile? {
+        val predicate = fileSystem.predicates().hasPath(path)
+        return fileSystem.inputFile(predicate)
     }
 
     companion object {
