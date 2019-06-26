@@ -41,11 +41,6 @@ internal class ViolationPersistence private constructor(
         value.map {
             violations.forEach { violation ->
                 val rule = RuleKey.of(OCLintRulesDefinition.REPOSITORY_KEY, violation.rule)
-                if (isRuleActive(rule)) {
-                    LOGGER.warn("\"{}\" is not an active rule", rule.toString())
-                    return@forEach
-                }
-
                 val newIssue = context.newIssue().forRule(rule)
                 val location = newIssue.newLocation()
                     .on(it)
@@ -80,10 +75,6 @@ internal class ViolationPersistence private constructor(
         }
 
         return Optional.of(inputFile)
-    }
-
-    private fun isRuleActive(rule: RuleKey): Boolean {
-        return null == context.activeRules().find(rule)
     }
 
     companion object {

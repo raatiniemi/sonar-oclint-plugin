@@ -169,8 +169,8 @@ class ViolationPersistenceTest {
 
         persistence.saveMeasures(violations)
 
-        assertFalse(isIssuePresent("unknown rule"))
-        assertTrue(logTester.logs().contains("\"OCLint:unknown rule\" is not an active rule"))
+        assertTrue(isIssuePresent("unknown rule"))
+        assertTrue(logTester.logs().isEmpty())
     }
 
     @Test
