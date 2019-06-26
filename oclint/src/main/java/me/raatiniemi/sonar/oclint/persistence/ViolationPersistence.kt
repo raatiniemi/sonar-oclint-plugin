@@ -30,9 +30,7 @@ internal class ViolationPersistence private constructor(
     private val fileSystem: FileSystem
 ) {
     fun saveMeasures(measures: Collection<Violation>) = measures.groupBy { it.path }
-        .forEach { (path, violations) ->
-            saveViolationsGroupedByFile(path, violations)
-        }
+        .forEach(::saveViolationsGroupedByFile)
 
     private fun saveViolationsGroupedByFile(path: String, violations: List<Violation>) {
         val inputFile = buildInputFile(path)
