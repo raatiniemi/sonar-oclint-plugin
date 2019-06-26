@@ -20,7 +20,6 @@ import me.raatiniemi.sonar.oclint.OCLintRulesDefinition
 import me.raatiniemi.sonar.oclint.Violation
 import me.raatiniemi.sonar.oclint.addToFileSystem
 import me.raatiniemi.sonar.oclint.mainFile
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -193,7 +192,7 @@ class ViolationPersistenceTest {
 
         persistence.saveMeasures(violations)
 
-        assertFalse(isIssuePresent("deep nested block"))
-        assertTrue(logTester.logs(LoggerLevel.DEBUG).contains("TargetName/ClassName.swift belong to language swift"))
+        assertTrue(isIssuePresent("deep nested block"))
+        assertTrue(logTester.logs().isEmpty())
     }
 }
