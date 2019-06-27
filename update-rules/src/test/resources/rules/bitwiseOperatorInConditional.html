@@ -1,0 +1,19 @@
+<div class="section" id="bitwiseoperatorinconditional">
+<h2>BitwiseOperatorInConditional<a class="headerlink" href="#bitwiseoperatorinconditional" title="Permalink to this headline">¶</a></h2>
+<p><strong>Since: 0.6</strong></p>
+<p><strong>Name: bitwise operator in conditional</strong></p>
+<p>Checks for bitwise operations in conditionals. Although being written on purpose in some rare cases, bitwise operations are considered to be too “smart”. Smart code is not easy to understand.</p>
+<p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp">oclint-rules/rules/basic/BitwiseOperatorInConditionalRule.cpp</a></p>
+<p><strong>Example:</strong></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">example</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
