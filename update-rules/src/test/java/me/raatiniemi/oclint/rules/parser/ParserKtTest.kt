@@ -70,4 +70,26 @@ class ParserKtTest {
 
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `parse rules with simple rule segment`() {
+        val expected = listOf(bitwiseOperatorInConditional)
+        val rule = readResource("rules/bitwiseOperatorInConditional.html")
+        val document = Jsoup.parse(rule)
+
+        val actual = parseRules(basic, document)
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `parse rules with advanced rule segment`() {
+        val expected = listOf(highNpathComplexity)
+        val rule = readResource("rules/highNpathComplexity.html")
+        val document = Jsoup.parse(rule)
+
+        val actual = parseRules(size, document)
+
+        assertEquals(expected, actual)
+    }
 }

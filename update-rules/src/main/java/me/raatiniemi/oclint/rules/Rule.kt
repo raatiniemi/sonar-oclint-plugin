@@ -17,9 +17,6 @@
 
 package me.raatiniemi.oclint.rules
 
-import org.jsoup.nodes.Element
-import org.jsoup.select.Elements
-
 internal data class Rule(
     val name: String,
     val description: String,
@@ -36,49 +33,4 @@ internal data class Rule(
         .replace("/", "_")
         .replace(" ", "_")
         .toUpperCase()
-
-
-    companion object {
-        fun from(category: RuleCategory, html: Element): Rule {
-            val elements = skipVersion(elementsFrom(html))
-
-            return Rule(
-                name = readName(elements),
-                description = readDescription(elements),
-                category = category.name,
-                severity = category.severity
-            )
-        }
-
-        private fun elementsFrom(html: Element): Elements = html.select("p, pre, dl")
-
-        private fun skipVersion(elements: List<Element>) = elements.drop(1)
-
-        private fun readName(elements: List<Element>): String {
-            return elements.first()
-                .select("p > strong")
-                .text()
-                .removePrefix("Name: ")
-                .capitalize()
-        }
-
-        private fun readDescription(elements: List<Element>): String {
-            return elements.drop(1)
-                .joinToString(separator = "\n") { buildElement(it) }
-        }
-
-        private fun buildElement(element: Element): String {
-            val tagName = element.tagName()// ?: return ""
-
-            return when (tagName) {
-                "pre" -> "<pre>${element.text()}</pre>"
-                null -> ""
-                else -> "<$tagName>${removeNewLines(element)}</$tagName>"
-            }
-        }
-
-        private fun removeNewLines(element: Element): String {
-            return element.html().replace("\n", "")
-        }
-    }
 }
