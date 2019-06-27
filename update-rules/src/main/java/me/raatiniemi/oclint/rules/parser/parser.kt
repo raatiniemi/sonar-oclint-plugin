@@ -17,6 +17,8 @@
 
 package me.raatiniemi.oclint.rules.parser
 
+import me.raatiniemi.oclint.rules.Rule
+import me.raatiniemi.oclint.rules.RuleCategory
 import org.jsoup.nodes.Document
 
 internal fun parseVersion(document: Document): String {
@@ -34,3 +36,7 @@ internal fun parseRuleCategories(document: Document): List<String> {
     return document.select(".toctree-l1 > a")
         .map { it.text() }
 }
+
+internal fun parseRules(category: RuleCategory, document: Document) =
+    document.select(".section > .section")
+        .map { Rule.from(category, html = it) }

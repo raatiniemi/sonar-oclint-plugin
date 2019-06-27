@@ -21,6 +21,7 @@ import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import me.raatiniemi.oclint.rules.parser.parseRuleCategories
+import me.raatiniemi.oclint.rules.parser.parseRules
 import me.raatiniemi.oclint.rules.parser.parseVersion
 import me.raatiniemi.oclint.rules.profile.profile
 import me.raatiniemi.oclint.rules.writer.writeAsJson
@@ -109,9 +110,7 @@ private fun nameForAvailableRuleCategories(): List<String> {
 }
 
 private fun fetchRulesFor(category: RuleCategory): List<Rule> {
-    return fetch(basenamePath(category))
-        .select(".section > .section")
-        .map { Rule.from(category, html = it) }
+    return parseRules(category, fetch(basenamePath(category)))
 }
 
 private fun fetch(path: String): Document {

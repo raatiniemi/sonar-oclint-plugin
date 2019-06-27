@@ -17,7 +17,7 @@
 
 package me.raatiniemi.oclint.rules.parser
 
-import me.raatiniemi.oclint.rules.readResource
+import me.raatiniemi.oclint.rules.*
 import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -53,6 +53,20 @@ class ParserKtTest {
         )
 
         val actual = parseRuleCategories(document)
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `parse rules with document`() {
+        val document = Jsoup.parse(readResource("unused.html"))
+        val ruleCategory = RuleCategory("Unused", RuleSeverity.INFO)
+        val expected = listOf(
+            unusedLocalVariable,
+            unusedMethodParameter
+        )
+
+        val actual = parseRules(ruleCategory, document)
 
         assertEquals(expected, actual)
     }
