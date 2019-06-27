@@ -29,3 +29,8 @@ internal fun parseVersion(document: Document): String {
         }
         .firstOrNull() ?: ""
 }
+
+internal fun parseRuleCategories(document: Document): List<String> {
+    return document.select(".toctree-l1 > a")
+        .map { it.text() }
+}

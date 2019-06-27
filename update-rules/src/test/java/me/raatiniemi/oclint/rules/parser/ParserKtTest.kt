@@ -35,4 +35,25 @@ class ParserKtTest {
 
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `parse rule categories with document`() {
+        val document = Jsoup.parse(readResource("index.html"))
+        val expected = listOf(
+            "Basic",
+            "Cocoa",
+            "Convention",
+            "Design",
+            "Empty",
+            "Migration",
+            "Naming",
+            "Redundant",
+            "Size",
+            "Unused"
+        )
+
+        val actual = parseRuleCategories(document)
+
+        assertEquals(expected, actual)
+    }
 }

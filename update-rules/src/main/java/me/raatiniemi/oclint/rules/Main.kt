@@ -20,6 +20,7 @@ package me.raatiniemi.oclint.rules
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
+import me.raatiniemi.oclint.rules.parser.parseRuleCategories
 import me.raatiniemi.oclint.rules.parser.parseVersion
 import me.raatiniemi.oclint.rules.profile.profile
 import me.raatiniemi.oclint.rules.writer.writeAsJson
@@ -104,9 +105,7 @@ private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<
 }
 
 private fun nameForAvailableRuleCategories(): List<String> {
-    return fetch("index.html")
-        .select(".toctree-l1 > a")
-        .map { it.text() }
+    return parseRuleCategories(fetch("index.html"))
 }
 
 private fun fetchRulesFor(category: RuleCategory): List<Rule> {
