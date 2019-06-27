@@ -25,12 +25,12 @@ internal data class Rule(
 ) {
     val key = name.toLowerCase()
     val type = {
-        val rule = Rules.valueOf(sanitizeKey())
+        val rule = Rules.valueOf(sanitize(key))
         rulesToTypes[rule] ?: Types.CODE_SMELL
     }()
-
-    private fun sanitizeKey() = key.replace("-", "_")
-        .replace("/", "_")
-        .replace(" ", "_")
-        .toUpperCase()
 }
+
+private fun sanitize(key: String) = key.replace("-", "_")
+    .replace("/", "_")
+    .replace(" ", "_")
+    .toUpperCase()
