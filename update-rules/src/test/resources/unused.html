@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>OCLint - 0.13 Documentation -  Unused</title>
+
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/badge_only.css" type="text/css" />
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:    '../',
+            VERSION:     '0.13',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/underscore.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/doctools.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OCLint Internals" href="../internals/index.html" />
+    <link rel="prev" title="Size" href="size.html" />
+    <meta charset='utf-8'>
+    <style type='text/css'>
+        /*<![CDATA[*/
+        body { padding-top: 20px; padding-bottom: 40px; }
+        .container-narrow { margin: 0 auto; max-width: 990px; }
+        .container-narrow > hr { margin: 30px 0 6px; }
+        .content { clear: both; overflow: hidden; }
+        h1 { font-size: 31.5px; }
+        h2 { font-size: 24.5px; }
+        h3 { font-size: 17.5px; }
+        h4 { font-size: 14px; }
+        h5 { font-size: 11.9px; }
+        h1 small { font-size: 17.5px; }
+        h2 small { font-size: 14px; }
+        a.headerlink { color: #E3E3E3; font-size: 0.8em; padding: 0 4px 0 9px; text-decoration: none; }
+        a.headerlink:hover { color: #08C; }
+        div.admonition { margin-top: 10px; margin-bottom: 10px; padding: 7px; }
+        div.note { background-color: #EEE; border: 1px solid #CCC; }
+        p.admonition-title { margin: 0px 10px 5px 0px; font-weight: bold; display: inline; }
+        div.seealso { background-color: #FFC; border: 1px solid #FF6; }
+        div.warning { background-color: #FFE4E4; border: 1px solid #F66; }
+        /*]]>*/
+    </style>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26647611-1']);
+        _gaq.push(['_setDomainName', 'oclint.org']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        //]]>
+    </script>
+
+
+    <!-- RTD Extra Head -->
+
+    <!--
+    Always link to the latest version, as canonical.
+    http://docs.readthedocs.org/en/latest/canonical.html
+    -->
+    <link rel="canonical" href="http://oclint-docs.readthedocs.io/en/stable/rules/unused.html" />
+
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css" />
+
+    <script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+    <!-- Add page-specific data, which must exist in the page js, not global -->
+    <script type="text/javascript">
+        READTHEDOCS_DATA['page'] = 'rules/unused'
+        READTHEDOCS_DATA['source_suffix'] = '.rst'
+    </script>
+
+    <script type="text/javascript" src="../_static/readthedocs-dynamic-include.js"></script>
+
+    <!-- end RTD <extrahead> --></head>
+<body role="document">
+<div class='container-narrow'>
+    <div class='masthead'>
+        <ul class='nav nav-pills pull-right'>
+            <li>
+                <a href='http://oclint.org/'>Home</a>
+            </li>
+            <li>
+                <a href='http://oclint.org/news.html'>News</a>
+            </li>
+            <li>
+                <a href='https://github.com/oclint/oclint/releases'>Downloads</a>
+            </li>
+            <li>
+                <a href='../index.html'>Documentation</a>
+            </li>
+            <li>
+                <a href='http://oclint.org/community.html'>Community</a>
+            </li>
+            <li>
+                <a href='http://github.com/oclint'>GitHub</a>
+            </li>
+        </ul>
+        <h2 class='muted'>OCLint</h2>
+    </div>
+    <div class='content'>
+        <div class='row-fluid'>
+            <div class='span9'>
+
+                <div class="section" id="unused">
+                    <h1>Unused<a class="headerlink" href="#unused" title="Permalink to this headline">¶</a></h1>
+                    <div class="section" id="unusedlocalvariable">
+                        <h2>UnusedLocalVariable<a class="headerlink" href="#unusedlocalvariable" title="Permalink to this headline">¶</a></h2>
+                        <p><strong>Since: 0.4</strong></p>
+                        <p><strong>Name: unused local variable</strong></p>
+                        <p>This rule detects local variables that are declared, but not used.</p>
+                        <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/unused/UnusedLocalVariableRule.cpp">oclint-rules/rules/unused/UnusedLocalVariableRule.cpp</a></p>
+                        <p><strong>Example:</strong></p>
+                        <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">example</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>          <span class="c1">// variable i is declared, but not used</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+                        </div>
+                        <p><strong>Suppress:</strong></p>
+                        <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">__attribute__</span><span class="p">((</span><span class="n">annotate</span><span class="p">(</span><span class="s">&quot;oclint:suppress[unused local variable]&quot;</span><span class="p">)))</span>
+</pre></div>
+                        </div>
+                    </div>
+                    <div class="section" id="unusedmethodparameter">
+                        <h2>UnusedMethodParameter<a class="headerlink" href="#unusedmethodparameter" title="Permalink to this headline">¶</a></h2>
+                        <p><strong>Since: 0.4</strong></p>
+                        <p><strong>Name: unused method parameter</strong></p>
+                        <p>This rule detects parameters that are not used in the method.</p>
+                        <p>This rule is defined by the following class: <a class="reference external" href="https://github.com/oclint/oclint/blob/master/oclint-rules/rules/unused/UnusedMethodParameterRule.cpp">oclint-rules/rules/unused/UnusedMethodParameterRule.cpp</a></p>
+                        <p><strong>Example:</strong></p>
+                        <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">example</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>  <span class="c1">// parameter a is not used</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+                        </div>
+                        <p><strong>Suppress:</strong></p>
+                        <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">__attribute__</span><span class="p">((</span><span class="n">annotate</span><span class="p">(</span><span class="s">&quot;oclint:suppress[unused method parameter]&quot;</span><span class="p">)))</span>
+</pre></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class='span3'>
+                <div class="well sidebar-nav">
+                    <div id="searchbox" style="display: none">
+                        <h3>Search</h3>
+                        <form class="search" action="../search.html" method="get">
+                            <div class="input-append">
+                                <input type="text" name="q" placeholder="search keywords" class="span9" id="appendedInputButton" />
+                                <input type="submit" value="Go!" class="btn" />
+                            </div>
+                            <input type="hidden" name="check_keywords" value="yes" />
+                            <input type="hidden" name="area" value="default" />
+                        </form>
+                    </div>
+                    <script type="text/javascript">$('#searchbox').show(0);</script>
+                    <h3>Contents</h3>
+                    <ul>
+                        <li><a class="reference internal" href="#">Unused</a><ul>
+                            <li><a class="reference internal" href="#unusedlocalvariable">UnusedLocalVariable</a></li>
+                            <li><a class="reference internal" href="#unusedmethodparameter">UnusedMethodParameter</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Hierarchy</h3>
+                    <ul>
+                        <li>
+                            <a href="../index.html">OCLint 0.13 documentation</a>
+
+                            <ul><li><a href="index.html">Rule Index</a>
+
+                                <ul><li>Unused</li></ul>
+                            </li></ul>
+                        </li>
+                    </ul>
+                    <h3>Navigation</h3>
+                    <ul>
+
+                        <li>Prev: <a href="size.html">Size</a></li>
+
+
+                        <li>Next: <a href="../internals/index.html">OCLint Internals</a></li>
+
+                        <li><a title="Home page" href="../index.html">Index</a></li>
+                        <li><a title="Table of contents" href="../contents.html">Table of Contents</a></li>
+                    </ul>
+                </div>
+                <div class="well sidebar-module">
+                    <p>OCLint documentation is a <a href="https://github.com/oclint/oclint-docs" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class='footer'>
+            OCLint 0.13 Documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            <br />
+            Maintained by <a href="https://ryuichi.co/labs?ref=oclint-docs">Ryuichi Laboratories</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.5.3.<br/>
+        </div>
+    </div>
+</body>
+</html>

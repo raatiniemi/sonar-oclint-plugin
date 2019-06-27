@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>OCLint - 0.13 Documentation -  Rule Index</title>
+
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/badge_only.css" type="text/css" />
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:    '../',
+            VERSION:     '0.13',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/underscore.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/doctools.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic" href="basic.html" />
+    <link rel="prev" title="Set Up OCLint in MinGW Environment" href="../howto/mingwsetup.html" />
+    <meta charset='utf-8'>
+    <style type='text/css'>
+        /*<![CDATA[*/
+        body { padding-top: 20px; padding-bottom: 40px; }
+        .container-narrow { margin: 0 auto; max-width: 990px; }
+        .container-narrow > hr { margin: 30px 0 6px; }
+        .content { clear: both; overflow: hidden; }
+        h1 { font-size: 31.5px; }
+        h2 { font-size: 24.5px; }
+        h3 { font-size: 17.5px; }
+        h4 { font-size: 14px; }
+        h5 { font-size: 11.9px; }
+        h1 small { font-size: 17.5px; }
+        h2 small { font-size: 14px; }
+        a.headerlink { color: #E3E3E3; font-size: 0.8em; padding: 0 4px 0 9px; text-decoration: none; }
+        a.headerlink:hover { color: #08C; }
+        div.admonition { margin-top: 10px; margin-bottom: 10px; padding: 7px; }
+        div.note { background-color: #EEE; border: 1px solid #CCC; }
+        p.admonition-title { margin: 0px 10px 5px 0px; font-weight: bold; display: inline; }
+        div.seealso { background-color: #FFC; border: 1px solid #FF6; }
+        div.warning { background-color: #FFE4E4; border: 1px solid #F66; }
+        /*]]>*/
+    </style>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26647611-1']);
+        _gaq.push(['_setDomainName', 'oclint.org']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        //]]>
+    </script>
+
+
+    <!-- RTD Extra Head -->
+
+    <!--
+    Always link to the latest version, as canonical.
+    http://docs.readthedocs.org/en/latest/canonical.html
+    -->
+    <link rel="canonical" href="http://oclint-docs.readthedocs.io/en/stable/rules/" />
+
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css" />
+
+    <script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+    <!-- Add page-specific data, which must exist in the page js, not global -->
+    <script type="text/javascript">
+        READTHEDOCS_DATA['page'] = 'rules/index'
+        READTHEDOCS_DATA['source_suffix'] = '.rst'
+    </script>
+
+    <script type="text/javascript" src="../_static/readthedocs-dynamic-include.js"></script>
+
+    <!-- end RTD <extrahead> --></head>
+<body role="document">
+<div class='container-narrow'>
+    <div class='masthead'>
+        <ul class='nav nav-pills pull-right'>
+            <li>
+                <a href='http://oclint.org/'>Home</a>
+            </li>
+            <li>
+                <a href='http://oclint.org/news.html'>News</a>
+            </li>
+            <li>
+                <a href='https://github.com/oclint/oclint/releases'>Downloads</a>
+            </li>
+            <li>
+                <a href='../index.html'>Documentation</a>
+            </li>
+            <li>
+                <a href='http://oclint.org/community.html'>Community</a>
+            </li>
+            <li>
+                <a href='http://github.com/oclint'>GitHub</a>
+            </li>
+        </ul>
+        <h2 class='muted'>OCLint</h2>
+    </div>
+    <div class='content'>
+        <div class='row-fluid'>
+            <div class='span9'>
+
+                <div class="section" id="rule-index">
+                    <h1>Rule Index<a class="headerlink" href="#rule-index" title="Permalink to this headline">¶</a></h1>
+                    <p>OCLint 0.13 includes 71 rules.</p>
+                    <div class="toctree-wrapper compound">
+                        <ul>
+                            <li class="toctree-l1"><a class="reference internal" href="basic.html">Basic</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#bitwiseoperatorinconditional">BitwiseOperatorInConditional</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#brokennullcheck">BrokenNullCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#brokennilcheck">BrokenNilCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#brokenoddnesscheck">BrokenOddnessCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#collapsibleifstatements">CollapsibleIfStatements</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#constantconditionaloperator">ConstantConditionalOperator</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#constantifexpression">ConstantIfExpression</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#deadcode">DeadCode</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#doublenegative">DoubleNegative</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#forloopshouldbewhileloop">ForLoopShouldBeWhileLoop</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#gotostatement">GotoStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#jumbledincrementer">JumbledIncrementer</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#misplacednullcheck">MisplacedNullCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#misplacednilcheck">MisplacedNilCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#multipleunaryoperator">MultipleUnaryOperator</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#returnfromfinallyblock">ReturnFromFinallyBlock</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="basic.html#throwexceptionfromfinallyblock">ThrowExceptionFromFinallyBlock</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="cocoa.html">Cocoa</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="cocoa.html#missinghashmethod">MissingHashMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="cocoa.html#missingcalltobasemethod">MissingCallToBaseMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="cocoa.html#callingprohibitedmethod">CallingProhibitedMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="cocoa.html#callingprotectedmethod">CallingProtectedMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="cocoa.html#missingabstractmethodimplementation">MissingAbstractMethodImplementation</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="convention.html">Convention</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#avoidbranchingstatementaslastinloop">AvoidBranchingStatementAsLastInLoop</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#problematicbaseclassdestructor">ProblematicBaseClassDestructor</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#unnecessarydefaultstatement">UnnecessaryDefaultStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#misplaceddefaultlabel">MisplacedDefaultLabel</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#destructorofvirtualclass">DestructorOfVirtualClass</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#invertedlogic">InvertedLogic</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#missingbreakinswitchstatement">MissingBreakInSwitchStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#noncaselabelinswitchstatement">NonCaseLabelInSwitchStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#assignivaroutsideaccessors">AssignIvarOutsideAccessors</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#parameterreassignment">ParameterReassignment</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#preferearlyexit">PreferEarlyExit</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#missingdefaultstatement">MissingDefaultStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="convention.html#toofewbranchesinswitchstatement">TooFewBranchesInSwitchStatement</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="design.html">Design</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="design.html#avoiddefaultargumentsonvirtualmethods">AvoidDefaultArgumentsOnVirtualMethods</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="design.html#avoidprivatestaticmembers">AvoidPrivateStaticMembers</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="empty.html">Empty</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptycatchstatement">EmptyCatchStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptydowhilestatement">EmptyDoWhileStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptyelseblock">EmptyElseBlock</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptyfinallystatement">EmptyFinallyStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptyforstatement">EmptyForStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptyifstatement">EmptyIfStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptyswitchstatement">EmptySwitchStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptytrystatement">EmptyTryStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="empty.html#emptywhilestatement">EmptyWhileStatement</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="migration.html#useboxedexpression">UseBoxedExpression</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="migration.html#usecontainerliteral">UseContainerLiteral</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="migration.html#usenumberliteral">UseNumberLiteral</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="migration.html#useobjectsubscripting">UseObjectSubscripting</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="naming.html">Naming</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="naming.html#longvariablename">LongVariableName</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="naming.html#shortvariablename">ShortVariableName</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="redundant.html">Redundant</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#redundantconditionaloperator">RedundantConditionalOperator</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#redundantifstatement">RedundantIfStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#redundantlocalvariable">RedundantLocalVariable</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#redundantnilcheck">RedundantNilCheck</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#unnecessaryelsestatement">UnnecessaryElseStatement</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#unnecessarynullcheckfordealloc">UnnecessaryNullCheckForDealloc</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="redundant.html#uselessparentheses">UselessParentheses</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="size.html">Size</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#highcyclomaticcomplexity">HighCyclomaticComplexity</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#longclass">LongClass</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#longline">LongLine</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#longmethod">LongMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#highncssmethod">HighNcssMethod</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#deepnestedblock">DeepNestedBlock</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#highnpathcomplexity">HighNPathComplexity</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#toomanyfields">TooManyFields</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#toomanymethods">TooManyMethods</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="size.html#toomanyparameters">TooManyParameters</a></li>
+                            </ul>
+                            </li>
+                            <li class="toctree-l1"><a class="reference internal" href="unused.html">Unused</a><ul>
+                                <li class="toctree-l2"><a class="reference internal" href="unused.html#unusedlocalvariable">UnusedLocalVariable</a></li>
+                                <li class="toctree-l2"><a class="reference internal" href="unused.html#unusedmethodparameter">UnusedMethodParameter</a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class='span3'>
+                <div class="well sidebar-nav">
+                    <div id="searchbox" style="display: none">
+                        <h3>Search</h3>
+                        <form class="search" action="../search.html" method="get">
+                            <div class="input-append">
+                                <input type="text" name="q" placeholder="search keywords" class="span9" id="appendedInputButton" />
+                                <input type="submit" value="Go!" class="btn" />
+                            </div>
+                            <input type="hidden" name="check_keywords" value="yes" />
+                            <input type="hidden" name="area" value="default" />
+                        </form>
+                    </div>
+                    <script type="text/javascript">$('#searchbox').show(0);</script>
+                    <h3>Contents</h3>
+                    <ul>
+                        <li><a class="reference internal" href="#">Rule Index</a></li>
+                    </ul>
+
+                    <h3>Hierarchy</h3>
+                    <ul>
+                        <li>
+                            <a href="../index.html">OCLint 0.13 documentation</a>
+
+                            <ul><li>Rule Index</li></ul>
+
+                        </li>
+                    </ul>
+                    <h3>Navigation</h3>
+                    <ul>
+
+                        <li>Prev: <a href="../howto/mingwsetup.html">Set Up OCLint in MinGW Environment</a></li>
+
+
+                        <li>Next: <a href="basic.html">Basic</a></li>
+
+                        <li><a title="Home page" href="../index.html">Index</a></li>
+                        <li><a title="Table of contents" href="../contents.html">Table of Contents</a></li>
+                    </ul>
+                </div>
+                <div class="well sidebar-module">
+                    <p>OCLint documentation is a <a href="https://github.com/oclint/oclint-docs" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class='footer'>
+            OCLint 0.13 Documentation is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            <br />
+            Maintained by <a href="https://ryuichi.co/labs?ref=oclint-docs">Ryuichi Laboratories</a>.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.5.3.<br/>
+        </div>
+    </div>
+</body>
+</html>

@@ -20,6 +20,9 @@ package me.raatiniemi.oclint.rules
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
+import me.raatiniemi.oclint.rules.parser.parseRuleCategories
+import me.raatiniemi.oclint.rules.parser.parseRules
+import me.raatiniemi.oclint.rules.parser.parseVersion
 import me.raatiniemi.oclint.rules.profile.profile
 import me.raatiniemi.oclint.rules.writer.writeAsJson
 import me.raatiniemi.oclint.rules.writer.writeToFile
@@ -80,15 +83,7 @@ internal fun writeRules(rules: List<Rule>): () -> String = {
 }
 
 private fun readVersion(): String {
-    return fetch("index.html")
-        .select("#rule-index > p")
-        .map { it.text() }
-        .mapNotNull {
-            val regex = """OCLint ([\d\.]+) includes""".toRegex()
-            val (version) = regex.find(it)?.destructured ?: return@mapNotNull null
-            return@mapNotNull version
-        }
-        .firstOrNull() ?: ""
+    return parseVersion(fetch("index.html"))
 }
 
 private fun writeVersionToReadMe(version: String) {
@@ -111,15 +106,11 @@ private fun listRuleCategoriesWithMissingSeverity(availableRuleCategories: List<
 }
 
 private fun nameForAvailableRuleCategories(): List<String> {
-    return fetch("index.html")
-        .select(".toctree-l1 > a")
-        .map { it.text() }
+    return parseRuleCategories(fetch("index.html"))
 }
 
 private fun fetchRulesFor(category: RuleCategory): List<Rule> {
-    return fetch(basenamePath(category))
-        .select(".section > .section")
-        .map { Rule.from(category, html = it) }
+    return parseRules(category, fetch(basenamePath(category)))
 }
 
 private fun fetch(path: String): Document {

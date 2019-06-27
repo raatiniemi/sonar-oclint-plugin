@@ -17,20 +17,12 @@
 
 package me.raatiniemi.oclint.rules
 
-internal data class Rule(
-    val name: String,
-    val description: String,
-    val category: String,
-    val severity: RuleSeverity
-) {
-    val key = name.toLowerCase()
-    val type = {
-        val rule = Rules.valueOf(sanitize(key))
-        rulesToTypes[rule] ?: Types.CODE_SMELL
-    }()
-}
+import java.io.FileNotFoundException
 
-private fun sanitize(key: String) = key.replace("-", "_")
-    .replace("/", "_")
-    .replace(" ", "_")
-    .toUpperCase()
+fun <T : Any> T.readResource(path: String): String {
+    val classLoader = javaClass.classLoader
+        ?: throw FileNotFoundException("Unable to read resource with path: $path")
+    val stream = classLoader.getResourceAsStream(path) ?: throw UnableToReadResourceAsStreamException()
+
+    return stream.bufferedReader().use { it.readText() }
+}

@@ -17,20 +17,4 @@
 
 package me.raatiniemi.oclint.rules
 
-internal data class Rule(
-    val name: String,
-    val description: String,
-    val category: String,
-    val severity: RuleSeverity
-) {
-    val key = name.toLowerCase()
-    val type = {
-        val rule = Rules.valueOf(sanitize(key))
-        rulesToTypes[rule] ?: Types.CODE_SMELL
-    }()
-}
-
-private fun sanitize(key: String) = key.replace("-", "_")
-    .replace("/", "_")
-    .replace(" ", "_")
-    .toUpperCase()
+class UnableToReadResourceAsStreamException : RuntimeException()
